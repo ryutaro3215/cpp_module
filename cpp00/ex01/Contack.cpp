@@ -81,7 +81,7 @@ void	Contact::add_phonenumber(Contact& current_contact)
 void	Contact::add_darkestsecret(Contact& current_contact)
 {
 	std::string	darkest_secret;
-	
+
 	while (true)
 	{
 		std::cout << "Enter darkestsecret: ";

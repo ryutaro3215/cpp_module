@@ -10,13 +10,15 @@ int main(void)
 	{
 		std::cout << "Enter a input: >> ";
 		std::getline(std::cin, input);
-		if (input == "EXIT")
+		if (input.empty())
+			continue ;
+		else if (input == "EXIT")
 			break ;
 		else if (input == "ADD")
 			phonebook.add_contact();
 		else if (input == "SEARCH")
 			phonebook.search_contact();
-		else
+		else 
 			std::cout << "Invalid input, please input ADD or SEARCH or EXIT!!" << std::endl;
 	}
 	return (0);
