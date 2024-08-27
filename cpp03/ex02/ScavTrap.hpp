@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 09:53:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/08/27 12:16:24 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/07/10 17:18:00 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/07/12 00:10:44 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/Harl.hpp"
+#include "ClapTrap.hpp"
 
-int	main(void)
+class	ScavTrap : public ClapTrap
 {
-	Harl	harl;
-
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	return (0);
-}
+	private:
+		bool	_guard_gate;
+	public:
+		ScavTrap(std::string _name);
+		~ScavTrap();
+		ScavTrap(const ScavTrap &other);
+		ScavTrap& operator=(const ScavTrap &other);
+		void	attack(const std::string &target);
+		void	guardGate();
+};

@@ -5,20 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 09:53:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/08/27 12:16:24 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/07/01 19:11:51 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/07/03 12:03:07 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/Harl.hpp"
+# include "Fixed.hpp"
 
 int	main(void)
 {
-	Harl	harl;
-
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	return (0);
+	Fixed a;
+	Fixed b( a );
+	Fixed c;
+	c = b;
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	return 0;
 }
