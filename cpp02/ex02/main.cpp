@@ -5,20 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 09:53:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/08/27 12:16:24 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/07/01 19:11:51 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/07/07 23:46:03 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/Harl.hpp"
+#include "Fixed.hpp"
 
-int	main(void)
+int main( void )
 {
-	Harl	harl;
-
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	return (0);
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
+	return 0;
 }

@@ -5,20 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 09:53:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/08/27 12:16:24 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/07/08 10:56:39 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/07/08 23:48:44 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/Harl.hpp"
+#include "ClapTrap.hpp"
 
 int	main(void)
 {
-	Harl	harl;
+	ClapTrap taro("Taro");
+	ClapTrap jiro("Jiro");
 
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
+	taro.attack("Jiro");
+	jiro.takeDamage(5);
+	jiro.beRepaired(3);
 	return (0);
 }

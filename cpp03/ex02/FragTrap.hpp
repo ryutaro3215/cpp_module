@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 09:53:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/08/27 12:16:24 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/07/15 18:20:02 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/07/15 18:29:07 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/Harl.hpp"
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
-int	main(void)
+# include "ClapTrap.hpp"
+
+class	FragTrap : public ClapTrap
 {
-	Harl	harl;
+	public:
+		FragTrap(std::string _name);
+		FragTrap(const FragTrap &other);
+		FragTrap &operator=(const FragTrap &other);
+		~FragTrap();
+		void	attack(const std::string &target);
+		void	highFivesGuys(void);
+};
 
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	return (0);
-}
+#endif

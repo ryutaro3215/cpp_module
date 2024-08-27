@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/30 09:53:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/08/27 12:16:24 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/07/20 13:52:06 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/07/21 21:01:54 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/Harl.hpp"
+#ifndef POINT_HPP
+# define POINT_HPP
 
-int	main(void)
+#include "Fixed.hpp"
+
+class	Point : public Fixed
 {
-	Harl	harl;
+	private:
+		Fixed const	_x;
+		Fixed const	_y;
+	public:
+		Point();
+		Point(const Fixed &x, const Fixed &y);
+		Point(const Point &point);
+		~Point();
+		Point	&operator=(const Point &point);
+		Fixed	getX() const;
+		Fixed	getY() const;
+};
 
-	harl.complain("DEBUG");
-	harl.complain("INFO");
-	harl.complain("WARNING");
-	harl.complain("ERROR");
-	return (0);
-}
+bool	bsp(Point const a, Point const b, Point const c, Point const point);
+
+#endif
