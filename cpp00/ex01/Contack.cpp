@@ -14,6 +14,11 @@ void	Contact::add_firstname(Contact& current_contact)
 	{
 		std::cout << "Enter first name: ";
 		std::getline(std::cin, first_name);
+		if (std::cin.eof())
+		{
+			std::cout << "EOF detected. Exiting program..." << std::endl;
+			exit(0);
+		}
 		if (first_name.empty())
 			std::cout << "First name is empty. Please enter a valid first name." << std::endl;
 		else
@@ -32,6 +37,11 @@ void	Contact::add_lastname(Contact& current_contact)
 	{
 		std::cout << "Enter last name: ";
 		std::getline(std::cin, last_name);
+		if (std::cin.eof())
+		{
+			std::cout << "EOF detected. Exiting program..." << std::endl;
+			exit(0);
+		}
 		if (last_name.empty())
 			std::cout << "Last name is empty. Please enter a valid last name." << std::endl;
 		else
@@ -50,6 +60,11 @@ void	Contact::add_nickname(Contact& current_contact)
 	{
 		std::cout << "Enter nickname: ";
 		std::getline(std::cin, nick_name);
+		if (std::cin.eof())
+		{
+			std::cout << "EOF detected. Exiting program..." << std::endl;
+			exit(0);
+		}
 		if (nick_name.empty())
 			std::cout << "Nickname is empty. Please enter a valid nickname." << std::endl;
 		else
@@ -68,6 +83,11 @@ void	Contact::add_phonenumber(Contact& current_contact)
 	{
 		std::cout << "Enter phone number: ";
 		std::getline(std::cin, phone_number);
+		if (std::cin.eof())
+		{
+			std::cout << "EOF detected. Exiting program..." << std::endl;
+			exit(0);
+		}
 		if (phone_number.empty())
 			std::cout << "Phone number is empty. Please enter a valid phone number." << std::endl;
 		else
@@ -86,6 +106,11 @@ void	Contact::add_darkestsecret(Contact& current_contact)
 	{
 		std::cout << "Enter darkestsecret: ";
 		std::getline(std::cin, darkest_secret);
+		if (std::cin.eof())
+		{
+			std::cout << "EOF detected. Exiting program..." << std::endl;
+			exit(0);
+		}
 		if (darkest_secret.empty())
 			std::cout << "Darkest secret is empty. Please enter a valid darkest secret." << std::endl;
 		else

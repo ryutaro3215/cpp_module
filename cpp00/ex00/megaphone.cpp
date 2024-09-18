@@ -1,8 +1,11 @@
 #include <iostream>
+#include <string>
+#include <cctype>
 
 int	main(int argc, char **argv)
 {
 	int	i = 1;
+	std::string str;
 
 	if (argc == 1)
 	{
@@ -10,7 +13,12 @@ int	main(int argc, char **argv)
 	}
 	while (i < argc)
 	{
-		std::cout << argv[i];
+		str = argv[i];
+		for (int j = 0; str[j]; j++)
+		{
+			str[j] = std::toupper(str[j]);
+		}
+		std::cout << str;
 		i++;
 	}
 	std::cout << std::endl;

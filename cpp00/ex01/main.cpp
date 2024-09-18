@@ -10,6 +10,8 @@ int main(void)
 	{
 		std::cout << "Enter a input: >> ";
 		std::getline(std::cin, input);
+		if (std::cin.eof())
+			break ;
 		if (input.empty())
 			continue ;
 		else if (input == "EXIT")
