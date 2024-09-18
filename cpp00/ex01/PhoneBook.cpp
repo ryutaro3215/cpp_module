@@ -28,17 +28,24 @@ void	PhoneBook::print_contact()
 	std::cout << "|     Index| Firstname|  Lastname|  Nickname|" << std::endl;
 	for (int i = 0; i < contact_number; i++)
 	{
-		if (i >= 4)
-			break ;
 		Contact& current_contact = contact[i];
 		std::cout << "|";
 		std::cout << std::setw(10) << i + 1;
 		std::cout << "|";
-		std::cout << std::setw(10) << current_contact.get_firstname().substr(0, 10);
+		if (current_contact.get_firstname().length() > 10)
+			std::cout << std::setw(10) << current_contact.get_firstname().substr(0, 9) + ".";
+		else
+			std::cout << std::setw(10) << current_contact.get_firstname().substr(0, 10);
 		std::cout << "|";
-		std::cout << std::setw(10) << current_contact.get_lastname().substr(0, 10);
+		if (current_contact.get_lastname().length() > 10)
+			std::cout << std::setw(10) << current_contact.get_lastname().substr(0, 9) + ".";
+		else
+			std::cout << std::setw(10) << current_contact.get_lastname().substr(0, 10);
 		std::cout << "|";
-		std::cout << std::setw(10) << current_contact.get_nickname().substr(0, 10);
+		if (current_contact.get_nickname().length() > 10)
+			std::cout << std::setw(10) << current_contact.get_nickname().substr(0, 9) + ".";
+		else
+			std::cout << std::setw(10) << current_contact.get_nickname().substr(0, 10);
 		std::cout << "|";
 		std::cout << std::endl;
 	}
