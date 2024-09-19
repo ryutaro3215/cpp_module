@@ -2,6 +2,9 @@
 #define CONTACT_HPP
 
 #include <string>
+#include <iostream>
+#include <limits>
+#include <cstdlib>
 
 class	Contact
 {
