@@ -6,12 +6,12 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 23:14:45 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/18 19:18:06 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:34:25 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <iomanip>
+#include <ctime>
 #include "Account.hpp"
 
 int	Account::_nbAccounts = 0;
@@ -35,14 +35,26 @@ int	Account::getNbWithdrawals(void) {
 	return _totalNbWithdrawals;
 }
 
-void	Account::_displayTimestamp(void) {
-	time_t		current_time;
-	struct tm*	time_info;
+// void	Account::_displayTimestamp(void) {
+// 	time_t		current_time;
+// 	struct tm*	time_info;
 
-	current_time = time(NULL);
-	time_info = localtime(&current_time);
-	std::cout << std::put_time(time_info, "[%Y%m%d_%H%M%S] ");
+// 	current_time = time(NULL);
+// 	time_info = localtime(&current_time);
+// 	std::cout << std::put_time(time_info, "[%Y%m%d_%H%M%S] ");
+// }
+
+void Account::_displayTimestamp(void) {
+    time_t current_time;
+    struct tm* time_info;
+    char buffer[80];
+
+    current_time = time(NULL);
+    time_info = localtime(&current_time);
+    std::strftime(buffer, sizeof(buffer), "[%Y%m%d_%H%M%S] ", time_info);
+    std::cout << buffer;
 }
+
 
 void	Account::displayAccountsInfos(void) {
 	Account::_displayTimestamp();
