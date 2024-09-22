@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 11:20:17 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/07/17 11:24:43 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:26:16 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ Cat &Cat::operator=(const Cat &other)
 	Animal::operator=(other);
 	std::cout << "Cat assignation operator called" << std::endl;
 	return *this;
+}
+
+void	Cat::setType()
+{
+	this->type = "Cat";
 }
 
 void	Cat::makeSound() const
