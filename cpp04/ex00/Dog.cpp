@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 10:22:22 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/07/17 11:00:18 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/22 14:59:17 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ Dog &Dog::operator=(const Dog &other)
 	Animal::operator=(other);
 	std::cout << "Dog assignation operator called" << std::endl;
 	return *this;
+}
+
+
+void	Dog::setType()
+{
+	this->type = "Dog";
 }
 
 void	Dog::makeSound() const

@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 10:36:58 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/07/17 11:26:30 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/21 19:26:21 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ class Cat : public Animal
 		Cat(const Cat &other);
 		Cat &operator=(const Cat &other);
 		void	makeSound() const;
+		void	setType();
 };
