@@ -6,13 +6,13 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:18:00 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/24 23:37:05 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:13:48 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-class	ScavTrap : public ClapTrap
+class	ScavTrap : virtual public ClapTrap
 {
 	private:
 		bool	_guard_gate;

@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:13:27 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 00:22:24 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:51:35 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,16 @@ FragTrap& FragTrap::operator=(const FragTrap &other) {
 }
 
 void	FragTrap::highFivesGuys(void) {
-	std::cout << "FragTrap " << getName() << " requests a high five." << std::endl;
+	if (getHitPoint() == 0) {
+		std::cout << "FragTrap " << getName() << " is dead." << std::endl;
+		return ;
+	}
+	else if (getEnergyPoint() == 0) {
+		std::cout << "FragTrap " << getName() << " is out of energy." << std::endl;
+		return ;
+	}
+	else {
+		std::cout << "FragTrap " << getName() << " requests a high five." << std::endl;
+		return ;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:17:49 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 00:07:24 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:56:55 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,22 @@ void	ScavTrap::attack(const std::string &target) {
 }
 
 void	ScavTrap::guardGate() {
-	if (getGuardGate())
-	{
-		std::cout << "ScavTrap " << getName() << " has already guarded the gate." << std::endl;
-		return ;
+	if (getHitPoint() == 0) {
+		std::cout << "ScavTrap " << getName() << " is already dead. can't guard the gate." << std::endl;
 	}
-	setGuardGate(true);
-	std::cout << "ScavTrap " << getName()<< " has guarded the gate." << std::endl;
+	else if (getEnergyPoint() == 0) {
+		std::cout << "ScavTrap " << getName() << " is out of energy. can't guard the gate." << std::endl;
+	}
+	else {
+		if (getGuardGate() == true) {
+			std::cout << "ScavTrap " << getName() << " has already guarded the gate." << std::endl;
+		}
+		else {
+			setGuardGate(true);
+			std::cout << "ScavTrap " << getName()<< " has guarded the gate." << std::endl;
+		}
+	}
+	return ;
 }
 
 void	ScavTrap::setGuardGate(bool guard_gate) {
