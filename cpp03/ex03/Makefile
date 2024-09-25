@@ -1,6 +1,6 @@
 CC = c++
 CFLAG = -Wall -Wextra -Werror -std=c++98
-NAME = animal 
+NAME = DiamondTrap
 SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)
 SRC = $(shell find . $(SRCDIR) -name "*.cpp" -type f | xargs)
 OBJDIR = objs
