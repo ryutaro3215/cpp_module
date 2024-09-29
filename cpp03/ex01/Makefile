@@ -1,4 +1,5 @@
-CC = c++
+CC = c++-14
+# CC = c++
 CFLAG = -Wall -Wextra -Werror -std=c++98
 NAME = ScavTrap 
 SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)

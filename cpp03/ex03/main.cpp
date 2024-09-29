@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 10:56:39 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 17:04:34 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:53:25 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int main() {
 	std::cout << "===========================ATTACK===========================" << std::endl;
 	DiamondTrap diamond_trap("Taro");
 	std::cout << "===========================DAMAGE===========================" << std::endl;
-	diamond_trap.takeDamage(std::numeric_limits<uint>::max());
+	diamond_trap.takeDamage(std::numeric_limits<unsigned int>::max());
 	diamond_trap.takeDamage(30);
 	std::cout << "===========================REPAIR===========================" << std::endl;
 	diamond_trap.beRepaired(2);
@@ -94,8 +94,8 @@ int main() {
 	diamond_trap.takeDamage(2);
 	std::cout << "===========================REPAIR===========================" << std::endl;
 	diamond_trap.beRepaired(2);
-	diamond_trap.beRepaired(std::numeric_limits<uint>::max());
-	diamond_trap.beRepaired(std::numeric_limits<uint>::max());
+	diamond_trap.beRepaired(std::numeric_limits<unsigned int>::max());
+	diamond_trap.beRepaired(std::numeric_limits<unsigned int>::max());
 	std::cout << "===========================HIGH FIVE GUYS===========================" << std::endl;
 	diamond_trap.highFivesGuys();
 	diamond_trap.highFivesGuys();
