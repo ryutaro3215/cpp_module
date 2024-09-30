@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:11:58 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/07/05 18:20:08 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/22 14:58:01 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <string>
+# include <cmath>
 
 class	Fixed
 {

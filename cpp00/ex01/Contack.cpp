@@ -17,7 +17,7 @@ void	Contact::add_firstname(Contact& current_contact)
 		if (std::cin.eof())
 		{
 			std::cout << "EOF detected. Exiting program..." << std::endl;
-			exit(0);
+			std::exit(0);
 		}
 		if (first_name.empty())
 			std::cout << "First name is empty. Please enter a valid first name." << std::endl;
@@ -40,7 +40,7 @@ void	Contact::add_lastname(Contact& current_contact)
 		if (std::cin.eof())
 		{
 			std::cout << "EOF detected. Exiting program..." << std::endl;
-			exit(0);
+			std::exit(0);
 		}
 		if (last_name.empty())
 			std::cout << "Last name is empty. Please enter a valid last name." << std::endl;
@@ -63,7 +63,7 @@ void	Contact::add_nickname(Contact& current_contact)
 		if (std::cin.eof())
 		{
 			std::cout << "EOF detected. Exiting program..." << std::endl;
-			exit(0);
+			std::exit(0);
 		}
 		if (nick_name.empty())
 			std::cout << "Nickname is empty. Please enter a valid nickname." << std::endl;
@@ -86,7 +86,7 @@ void	Contact::add_phonenumber(Contact& current_contact)
 		if (std::cin.eof())
 		{
 			std::cout << "EOF detected. Exiting program..." << std::endl;
-			exit(0);
+			std::exit(0);
 		}
 		if (phone_number.empty())
 			std::cout << "Phone number is empty. Please enter a valid phone number." << std::endl;
@@ -109,7 +109,7 @@ void	Contact::add_darkestsecret(Contact& current_contact)
 		if (std::cin.eof())
 		{
 			std::cout << "EOF detected. Exiting program..." << std::endl;
-			exit(0);
+			std::exit(0);
 		}
 		if (darkest_secret.empty())
 			std::cout << "Darkest secret is empty. Please enter a valid darkest secret." << std::endl;

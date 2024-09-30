@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 23:14:45 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/19 16:34:25 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:00:49 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ int	Account::getNbDeposits(void) {
 int	Account::getNbWithdrawals(void) {
 	return _totalNbWithdrawals;
 }
-
-// void	Account::_displayTimestamp(void) {
-// 	time_t		current_time;
-// 	struct tm*	time_info;
-
-// 	current_time = time(NULL);
-// 	time_info = localtime(&current_time);
-// 	std::cout << std::put_time(time_info, "[%Y%m%d_%H%M%S] ");
-// }
 
 void Account::_displayTimestamp(void) {
     time_t current_time;
@@ -72,7 +63,6 @@ Account::Account(int initial_deposit) : _accountIndex(_nbAccounts),
 		<< "created" << std::endl;
 	Account::_totalAmount += this->_amount;
 	Account::_nbAccounts++;
-	Account::_totalNbDeposits++;
 }
 
 Account::~Account(void) {
