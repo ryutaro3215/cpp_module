@@ -6,13 +6,20 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 12:46:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 16:57:22 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:05:37 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_crap_name"), ScavTrap(name), FragTrap(name), _name(name) {
+DiamondTrap::DiamondTrap() : ClapTrap("default_crap_name"), ScavTrap("default"), FragTrap("default"), name_("default") {
+	std::cout << "DiamondTrap default constructor called" << std::endl;
+	setHitPoint(FragTrap::getHitPoint());
+	setEnergyPoint(ScavTrap::getEnergyPoint());
+	setAttackDamage(FragTrap::getAttackDamage());
+}
+
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_crap_name"), ScavTrap(name), FragTrap(name), name_(name) {
 	std::cout << "DiamondTrap constructor called" << std::endl;
 	setHitPoint(FragTrap::getHitPoint());
 	setEnergyPoint(ScavTrap::getEnergyPoint());
@@ -61,6 +68,15 @@ void	DiamondTrap::whoAmI() {
 		std::cout << "My name is " << getName() << " and my ClapTrap name is " 
 			<< ClapTrap::getName() << std::endl;
 	}
+	return ;
+}
+
+std::string DiamondTrap::getName() const {
+	return name_;
+}
+
+void	DiamondTrap::setName(std::string name) {
+	this->name_ = name;
 	return ;
 }
 

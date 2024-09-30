@@ -6,13 +6,20 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:13:27 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 00:22:24 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:02:21 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(std::string _name) : ClapTrap(_name) {
+FragTrap::FragTrap() : ClapTrap() {
+	setHitPoint(100);
+	setEnergyPoint(100);
+	setAttackDamage(30);
+	std::cout << "FragTrap " << getName() << " created." << std::endl;
+}
+
+FragTrap::FragTrap(std::string name) : ClapTrap(name) {
 	setHitPoint(100);
 	setEnergyPoint(100);
 	setAttackDamage(30);
@@ -28,6 +35,7 @@ FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other) {
 }
 
 FragTrap& FragTrap::operator=(const FragTrap &other) {
+	std::cout << "FragTrap copy assignment operator called." << std::endl;
 	if (this == &other)
 		return *this;
 	ClapTrap::operator=(other);
