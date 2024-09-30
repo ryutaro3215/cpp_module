@@ -6,14 +6,21 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:17:49 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 00:07:24 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:43:06 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 
-ScavTrap::ScavTrap(std::string _name) : ClapTrap(_name), _guard_gate(false) {
+ScavTrap::ScavTrap() : ClapTrap(), guard_gate_(false) {
+	setHitPoint(100);
+	setEnergyPoint(50);
+	setAttackDamage(20);
+	std::cout << "ScavTrap " << getName() << " created." << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string _name) : ClapTrap(_name), guard_gate_(false) {
 	setHitPoint(100);
 	setEnergyPoint(50);
 	setAttackDamage(20);
@@ -26,18 +33,14 @@ ScavTrap::~ScavTrap() {
 
 ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
 	std::cout << "ScavTrap copy constructor  called." << std::endl;
-	setGuardGate(other._guard_gate);
+	setGuardGate(other.guard_gate_);
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
 	std::cout << "ScavTrap copy assignment operator called." << std::endl;
 	if (this == &other)
 		return *this;
-	setName(other.getName());
-	setHitPoint(other.getHitPoint());
-	setEnergyPoint(other.getEnergyPoint());
-	setAttackDamage(other.getAttackDamage());
-	setGuardGate(other._guard_gate);
+	ClapTrap::operator=(other);
 	return *this;
 }
 
@@ -65,10 +68,10 @@ void	ScavTrap::guardGate() {
 }
 
 void	ScavTrap::setGuardGate(bool guard_gate) {
-	this->_guard_gate = guard_gate;
+	this->guard_gate_ = guard_gate;
 }
 
 bool	ScavTrap::getGuardGate() const {
-	return _guard_gate;
+	return guard_gate_;
 }
 
