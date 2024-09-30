@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 00:13:41 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 16:13:39 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:02:16 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 class FragTrap : virtual public ClapTrap
 {
 	public:
-		FragTrap(std::string _name);
+		FragTrap();
+		FragTrap(std::string name);
 		~FragTrap();
 		FragTrap(const FragTrap &other);
 		FragTrap& operator=(const FragTrap &other);
