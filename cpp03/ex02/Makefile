@@ -1,4 +1,5 @@
-CC = c++
+# CC = c++
+CC = c++-14
 CFLAG = -Wall -Wextra -Werror -std=c++98
 NAME = FragTrap 
 SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)

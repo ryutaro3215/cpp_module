@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 10:56:39 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/25 00:23:33 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/09/29 14:44:56 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main() {
 	std::cout << "===========================ATTACK===========================" << std::endl;
 	FragTrap frag_trap("Taro");
 	std::cout << "===========================DAMAGE===========================" << std::endl;
-	frag_trap.takeDamage(std::numeric_limits<uint>::max());
+	frag_trap.takeDamage(std::numeric_limits<unsigned int>::max());
 	frag_trap.takeDamage(30);
 	std::cout << "===========================REPAIR===========================" << std::endl;
 	frag_trap.beRepaired(2);
@@ -75,8 +75,8 @@ int main() {
 	frag_trap.takeDamage(2);
 	std::cout << "===========================REPAIR===========================" << std::endl;
 	frag_trap.beRepaired(2);
-	frag_trap.beRepaired(std::numeric_limits<uint>::max());
-	frag_trap.beRepaired(std::numeric_limits<uint>::max());
+	frag_trap.beRepaired(std::numeric_limits<unsigned int>::max());
+	frag_trap.beRepaired(std::numeric_limits<unsigned int>::max());
 	std::cout << "===========================HIGH FIVE GUYS===========================" << std::endl;
 	frag_trap.highFivesGuys();
 	frag_trap.highFivesGuys();
