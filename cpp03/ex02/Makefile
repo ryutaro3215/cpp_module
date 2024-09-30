@@ -1,5 +1,5 @@
-CC = c++
-CFLAG = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+CXXFLAG = -Wall -Wextra -Werror -std=c++98
 NAME = FragTrap 
 SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)
 SRC = $(shell find . $(SRCDIR) -name "*.cpp" -type f | xargs)
@@ -13,12 +13,12 @@ vpath	$(SRCDIR)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAG) $(OBJ) $(INCLUDE) $(LIBRARY) -o $(NAME)
+	@$(CXX) $(CXXFLAG) $(OBJ) $(INCLUDE) $(LIBRARY) -o $(NAME)
 	@echo "Compilation done"
 
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAG) $(INCLUDE) -c $< -o $@
+	@$(CXX) $(CXXFLAG) $(INCLUDE) -c $< -o $@
 	@echo "Compiled "$<" successfully"
 
 clean:
