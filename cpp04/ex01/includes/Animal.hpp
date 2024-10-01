@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:58:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/28 21:38:29 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:21:13 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class	Animal
 {
 	protected:
-		std::string _type;
+		std::string type_;
 	public:
 		Animal();
 		virtual ~Animal();

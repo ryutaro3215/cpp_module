@@ -6,11 +6,11 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:47:59 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/28 19:51:57 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:40:00 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
+#include "includes/WrongCat.hpp"
 
 WrongCat::WrongCat() : WrongAnimal() {
 	std::cout << "WrongCat Default constructor called" << std::endl;

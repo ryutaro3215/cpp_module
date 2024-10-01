@@ -6,11 +6,11 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 19:44:15 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/28 19:46:56 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:39:40 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongAnimal.hpp"
+#include "includes/WrongAnimal.hpp"
 
 WrongAnimal::WrongAnimal() : _type("WrongAnimal") {
 	std::cout << "WrongAnimal Default constructor called" << std::endl;

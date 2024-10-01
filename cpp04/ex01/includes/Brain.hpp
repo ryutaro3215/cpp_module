@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:58:24 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/28 16:15:40 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:23:09 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class Brain {
 	private:
-		std::string _ideas[100];
+		std::string ideas_[100];
 	public:
 		Brain();
 		~Brain();

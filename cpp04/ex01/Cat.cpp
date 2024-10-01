@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:29:06 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/28 21:41:17 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/01 14:22:44 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Cat	&Cat::operator=(const Cat &other) {
 	Animal::operator=(other);
 	Brain *tmp = _brain;
 	_brain = new Brain(*other.getBrain());
+	setType(other.getType());
 	delete tmp;
 	return *this;
 }
