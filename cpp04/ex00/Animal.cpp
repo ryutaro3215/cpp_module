@@ -6,13 +6,13 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:04:14 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/27 12:24:54 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:39:21 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "includes/Animal.hpp"
 
-Animal::Animal() : _type("Animal") {
+Animal::Animal() : type_("Animal") {
 	std::cout << "Animal constructor called" << std::endl;
 }
 
@@ -34,11 +34,11 @@ Animal &Animal::operator=(const Animal &other) {
 }
 
 void	Animal::setType(std::string type) {
-	this->_type = type;
+	this->type_ = type;
 }
 
 std::string Animal::getType() const {
-	return this->_type;
+	return this->type_;
 }
 
 void	Animal::makeSound() const {

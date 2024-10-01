@@ -6,11 +6,11 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:29:06 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/27 12:21:01 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/01 13:39:26 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "includes/Cat.hpp"
 
 Cat::Cat() : Animal() {
 	std::cout << "Cat constructor called" << std::endl;
@@ -30,6 +30,7 @@ Cat	&Cat::operator=(const Cat &other) {
 	std::cout << "Cat assignment operator called" << std::endl;
 	if (this == &other)
 		return *this;
+	Animal::operator=(other);
 	setType(other.getType());
 	return *this;
 }
