@@ -20,6 +20,5 @@ int main() {
 	FragTrap copy(ft);
 	FragTrap assgin;
 	assgin = ft;
-
-	ft.highFivesGuys();
+  return 0;
 }
