@@ -1,11 +1,12 @@
 CXX = c++
 CXXFLAG = -Wall -Wextra -Werror -std=c++98
-NAME =
+NAME = Animal 
 SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)
 SRC = $(shell find . $(SRCDIR) -name "*.cpp" -type f | xargs)
 OBJDIR = objs
 OBJ = $(SRC:%.cpp=$(OBJDIR)/%.o)
 INCLUDE = -I includes
+
 
 vpath	$(SRCDIR)
 
