@@ -12,7 +12,22 @@
 
 #include "./includes/AMateria.hpp"
 
-AMateria::AMateria(std::string const &type) : type_(type) {
-
+AMateria::AMateria() : type_("default") {
+	std::cout << "Default AMateria constructor called" << std::endl;
 }
 
+AMateria::AMateria(std::string const &type) : type_(type) {
+	std::cout << "AMateria constructor called" << std::endl;
+}
+
+AMateria::~AMateria() {
+	std::cout << "AMateria destructor called" << std::endl;
+}
+
+std::string const &AMateria::getType() const {
+	return this->type_;
+}
+
+void	AMateria::use(ICharacter &target) {
+	std::cout << "AMateria " << target.getType << std::endl;
+}
