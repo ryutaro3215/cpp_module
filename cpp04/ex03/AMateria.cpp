@@ -1,12 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ryutaro320515 <marvin@42.fr>               +#+  +:+       +#+        */
+/*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 11:02:33 by ryutaro320515     #+#    #+#             */
-/*   Updated: 2024/10/14 17:54:48 by ryutaro320515    ###   ########.fr       */
+/*   Created: 2024/10/16 11:55:19 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/10/16 13:14:06 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "./includes/AMateria.hpp"
+
+AMateria::AMateria(std::string const &type) : type_(type) {
+
+}
 
