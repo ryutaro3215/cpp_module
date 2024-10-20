@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:31:45 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/16 20:03:16 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/18 10:51:02 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ Ice::Ice(const Ice &other) : AMateria(other.type_) {
 }
 
 Ice &Ice::operator=(const Ice &other) {
-	stdL::cout << "Ice assignation operator called" << std::endl;
+	std::cout << "Ice assignation operator called" << std::endl;
+	if (this == &other)
+		return *this;
+	type_ = getType(); 
+	return *this;
+}
 
+AMateria *Ice::clone() const {
+	return new Ice(*this);
 }
