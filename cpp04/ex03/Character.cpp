@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:24:37 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/23 12:32:10 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:39:24 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	Character::unequip(int idx) {
 		std::cout << "Invalid index" << std::endl;
 	}
 	else if (!is_equipped_[idx]) {
-		std::cout << "No materia equipped at this index"
+		std::cout << "Already no materia equipped at this index"
 			<< std::endl;
 	}
 	else {
