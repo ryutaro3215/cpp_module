@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 11:55:19 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/23 12:10:18 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:52:11 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ std::string const &AMateria::getType() const {
 }
 
 void	AMateria::use(ICharacter &target) {
-	std::cout << "AMateria " << target.getName() << std::endl;
+	std::cout << "AMateria is used to " << target.getName() << std::endl;
 }

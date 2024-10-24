@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:21:52 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/23 20:06:57 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/24 13:47:58 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	MateriaSource::learnMateria(AMateria *m) {
 	}
 	else if (counter_ >= 4) {
 		std::cout << "MateriaSource is full" << std::endl;
+		delete m;
 	}
 	else {
 		source_[counter_] = m;
