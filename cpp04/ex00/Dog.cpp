@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:52:12 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/01 13:39:31 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:28:11 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 Dog::Dog() : Animal() {
 	std::cout << "Dog constructor called" << std::endl;
-	setType("Dog");
 }
 
 Dog::~Dog() {
 	std::cout << "Dog destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &other) {
+Dog::Dog(const Dog &other) : Animal(other) {
 	std::cout << "Dog copy constructor called" << std::endl;
 	setType(other.getType());
 }

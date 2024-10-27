@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:04:14 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/01 14:21:35 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 20:12:37 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,14 @@ Animal::~Animal() {
 	std::cout << "Animal destructor called" << std::endl;
 }
 
-Animal::Animal(const Animal &other) {
+Animal::Animal(const Animal &other) : type_(other.type_) {
 	std::cout << "Animal copy constructor called" << std::endl;
-	setType(other.getType());
 }
 
 Animal &Animal::operator=(const Animal &other) {
 	std::cout << "Animal assignment operator called" << std::endl;
 	if (this == &other)
 		return *this;
-	setType(other.getType());
 	return *this;
 }
 

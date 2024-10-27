@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAG = -Wall -Wextra -Werror -std=c++98
+CXXFLAG = -Wall -Wextra -Werror -std=c++98 
 NAME = Animal 
 SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)
 SRC = $(shell find . $(SRCDIR) -name "*.cpp" -type f | xargs)
