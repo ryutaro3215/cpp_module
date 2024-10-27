@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:58:50 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/01 13:28:55 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:34:55 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class	Animal
 		std::string type_;
 	public:
 		Animal();
-		~Animal();
+		virtual ~Animal();
 		Animal(const Animal &other);
 		Animal &operator=(const Animal &other);
 		void	setType(std::string type);
