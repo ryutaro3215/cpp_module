@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:43:55 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/26 15:46:51 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 17:24:49 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ class Bureaucrat {
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat &other);
 		Bureaucrat &operator=(const Bureaucrat &other);
+		Bureaucrat &operator<<(const Bureaucrat &other);
+		const string getName() const;
+		const int getGrade() const;
 };
 
 #endif
