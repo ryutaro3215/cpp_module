@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:54:34 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/23 11:55:25 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/28 00:55:46 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Ice : public AMateria {
 		~Ice();
 		Ice &operator=(const Ice &other);
 		AMateria *clone() const;
-		/* void use(ICharacter &target); */
+		void use(ICharacter &target);
 };
 
 #endif
