@@ -6,11 +6,12 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 01:08:12 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 11:32:30 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:53:48 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/Bureaucrat.hpp"
+#include "./includes/Form.hpp"
 
 /* overload of std::exception::what */
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
@@ -78,6 +79,14 @@ void Bureaucrat::downGrade() {
 		throw GradeTooLowException();
 	}
 	grade_++;
+}
+
+void Bureaucrat::signForm(Form &form) {
+	if (form.getIsSigned() == true)
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	else
+		std::cout << "Bureaucrat " << this->getName() << " couldn't sign " << form.getName() << " because " <<
+			this->getName() << "'s grade is too low." << std::endl;
 }
 
 /* overload of << operator */
