@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 17:06:30 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 18:41:21 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:44:15 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name_(name), grade_(grade)
 }
 
 /* destructor of Bureaucrat */
->>>>>>> origin
 Bureaucrat::~Bureaucrat() {
 	std::cout << "Bureaucrat destructor called" << std::endl;
 }
