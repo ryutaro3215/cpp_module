@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:29:06 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/01 13:39:26 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 19:26:23 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Cat::~Cat() {
 	std::cout << "Cat destructor called" << std::endl;
 }
 
-Cat::Cat(const Cat &other) {
+Cat::Cat(const Cat &other) : Animal(other) {
 	std::cout << "Cat copy constructor called" << std::endl;
 	setType(other.getType());
 }

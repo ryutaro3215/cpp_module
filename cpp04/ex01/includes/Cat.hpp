@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:27:07 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/28 21:08:14 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 20:00:19 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class Cat : public Animal {
 	private:
-		Brain *_brain;
+		Brain *brain_;
 	public:
 		Cat();
 		~Cat();

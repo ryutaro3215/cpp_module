@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:29:06 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/01 14:22:44 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 20:07:29 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 Cat::Cat() : Animal() {
 	std::cout << "Cat constructor called" << std::endl;
 	setType("Cat");
-	_brain = new Brain();
+	brain_ = new Brain();
 }
 
 Cat::~Cat() {
 	std::cout << "Cat destructor called" << std::endl;
-	delete _brain;
+	delete brain_;
 }
 
 Cat::Cat(const Cat &other) : Animal(other) {
 	std::cout << "Cat copy constructor called" << std::endl;
 	setType(other.getType());
-	_brain = new Brain(*other.getBrain());
+	brain_ = new Brain(*other.getBrain());
 }
 
 Cat	&Cat::operator=(const Cat &other) {
@@ -34,8 +34,8 @@ Cat	&Cat::operator=(const Cat &other) {
 	if (this == &other)
 		return *this;
 	Animal::operator=(other);
-	Brain *tmp = _brain;
-	_brain = new Brain(*other.getBrain());
+	Brain *tmp = brain_;
+	brain_ = new Brain(*other.getBrain());
 	setType(other.getType());
 	delete tmp;
 	return *this;
@@ -46,9 +46,9 @@ void	Cat::makeSound() const {
 }
 
 Brain	*Cat::getBrain() const {
-	return _brain;
+	return brain_;
 }
 
 void	Cat::setBrain(Brain *brain) {
-	this->_brain = brain;
+	this->brain_ = brain;
 }

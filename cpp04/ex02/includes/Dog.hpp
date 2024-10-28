@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:51:37 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/09/28 21:08:44 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/27 20:00:33 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class Dog : public Animal {
 	private:
-		Brain *_brain;
+		Brain *brain_;
 	public:
 		Dog();
 		~Dog();

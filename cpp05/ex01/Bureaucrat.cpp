@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 17:06:30 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 18:41:21 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/10/28 01:08:12 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/10/28 15:53:48 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/Bureaucrat.hpp"
+#include "./includes/Form.hpp"
 
 /* overload of std::exception::what */
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
@@ -37,7 +38,6 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name_(name), grade_(grade)
 }
 
 /* destructor of Bureaucrat */
->>>>>>> origin
 Bureaucrat::~Bureaucrat() {
 	std::cout << "Bureaucrat destructor called" << std::endl;
 }
@@ -81,8 +81,17 @@ void Bureaucrat::downGrade() {
 	grade_++;
 }
 
+void Bureaucrat::signForm(Form &form) {
+	if (form.getIsSigned() == true)
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	else
+		std::cout << "Bureaucrat " << this->getName() << " couldn't sign " << form.getName() << " because " <<
+			this->getName() << "'s grade is too low." << std::endl;
+}
+
 /* overload of << operator */
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
 	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
 	return os;
 }
+
