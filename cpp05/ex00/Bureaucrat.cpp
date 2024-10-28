@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 01:08:12 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 11:32:30 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/10/27 17:06:30 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/10/28 18:44:15 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
 	os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
 	return os;
 }
-
