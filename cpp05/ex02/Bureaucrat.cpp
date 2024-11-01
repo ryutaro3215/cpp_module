@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 01:08:12 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/31 16:43:44 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/01 10:51:54 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,17 @@ void Bureaucrat::signForm(AForm &form) {
 		return ;
 	}
 	std::cout << getName() << " signed " << form.getName() << std::endl;
+}
+
+void Bureaucrat::executeForm(AForm const &form) {
+	try {
+		std::cout << getName() << " executes " << form.getName() << std::endl;
+		form.execute(*this);
+	} catch (AForm::isNotsignedException &e) {
+		std::cerr << getName() << " cannot execute " << form.getName() << " because it is not signed" << std::endl;
+	} catch (AForm::GradeTooLowException &e) {
+		std::cerr << getName() << " cannot execute " << form.getName() << " because " << getName() << "'s grade is too low" << std::endl;
+	} 
 }
 
 /* overload of << operator */

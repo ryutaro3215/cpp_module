@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:43:55 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/29 10:36:57 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/01 10:36:43 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ class Bureaucrat {
 		void upGrade();
 		void downGrade();
 		void signForm(AForm &form);
+		void executeForm(AForm const &form);
 		class GradeTooHighException : public std::exception {
 			public:
 				virtual const char *what() const throw();
