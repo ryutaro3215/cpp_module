@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 15:55:34 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/06 15:55:55 by rmatsuba         ###   ########.fr       */
+/*   Created: 2024/11/22 17:32:42 by rmatsuba          #+#    #+#             */
+/*   Updated: 2024/11/22 18:25:03 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
-
+#include "./includes/ScalarConverter.hpp"
 #include <iostream>
 
-class ScalarConverter {
 
+int main(int argc, char **argv)
+{
+	(void)argv;
+	if (argc != 2)
+	{
+		std::cerr << "Error: Invalid number of arguments" << std::endl;
+		return 1;
+	}
+	ScalarConverter::convert(argv[1]);
 }
-
-#endif
