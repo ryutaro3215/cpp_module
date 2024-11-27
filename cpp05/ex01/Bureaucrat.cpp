@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 01:08:12 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 15:53:48 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:49:50 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 }
 
 /* this is default constructor of Bureaucrat */
-Bureaucrat::Bureaucrat() : name_("default"), grade_(150) {
-	std::cout << "Bureaucrat default constructor called" << std::endl;
-}
+Bureaucrat::Bureaucrat() : name_("default"), grade_(150) {}
 
 /* This is the constructor of Bureaucrat */
 Bureaucrat::Bureaucrat(std::string name, int grade) : name_(name), grade_(grade) {
-	std::cout << "Bureaucrat constructor called" << std::endl;
 	if (grade_ < 1)
 		throw GradeTooHighException();
 	else if (grade_ > 150)
@@ -38,18 +35,13 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name_(name), grade_(grade)
 }
 
 /* destructor of Bureaucrat */
-Bureaucrat::~Bureaucrat() {
-	std::cout << "Bureaucrat destructor called" << std::endl;
-}
+Bureaucrat::~Bureaucrat() {}
 
 /* copy constructor of Bureaucrat */
-Bureaucrat::Bureaucrat(const Bureaucrat &other) : name_(other.name_), grade_(other.grade_) {
-	std::cout << "Bureaucrat copy constructor called" << std::endl;
-}
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : name_(other.name_), grade_(other.grade_) {}
 
 /* assignment operator of Bureaucrat */
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
-	std::cout << "Bureaucrat assignment operator called" << std::endl;
 	if (this == &other)
 		return *this;
 	grade_ = other.grade_;
@@ -82,11 +74,16 @@ void Bureaucrat::downGrade() {
 }
 
 void Bureaucrat::signForm(Form &form) {
-	if (form.getIsSigned() == true)
-		std::cout << this->getName() << " signed " << form.getName() << std::endl;
-	else
-		std::cout << "Bureaucrat " << this->getName() << " couldn't sign " << form.getName() << " because " <<
-			this->getName() << "'s grade is too low." << std::endl;
+	if (form.getIsSigned() == true) {
+		std::cout << this->getName() << " can't sign " <<
+			form.getName() << " because it's already signed" << std::endl;
+	}
+	try {
+		form.beSigned(*this);
+	} catch (std::exception &e) {
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+		return ;
+	}
 }
 
 /* overload of << operator */

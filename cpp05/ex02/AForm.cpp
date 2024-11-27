@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:37:46 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/31 15:19:13 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:54:23 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ const int &AForm::getExecGrade() const {
 	return execGrade_;
 }
 
-void AForm::beSigned(Bureaucrat &bureaucrat) {
+void AForm::beSigned(Bureaucrat const &bureaucrat) {
 	if (bureaucrat.getGrade() > signGrade_)
 		throw AForm::GradeTooLowException();
 	isSigned_ = true;

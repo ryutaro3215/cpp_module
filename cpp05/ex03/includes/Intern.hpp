@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:00:00 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/02 01:56:44 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:26:24 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ class Intern {
 		~Intern();
 		Intern &operator=(const Intern &other);
 		AForm *makeForm(std::string name, std::string target);
+		static AForm *makePresidentialPardonForm(const std::string &target);
+		static AForm *makeRobotomyRequestForm(const std::string &target);
+		static AForm *makeShrubberyCreationForm(const std::string &target);
 };
 
 #endif
