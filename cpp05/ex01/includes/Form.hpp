@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:37:51 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 14:48:15 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:53:09 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ class Form {
 		bool isSigned_;
 		const int signGrade_;
 		const int execGrade_;
-	public:
 		Form();
+	public:
 		Form(const std::string name, const int signGrade, const int execGrade);
 		Form(const Form &other);
 		Form &operator=(const Form &other);
@@ -33,7 +33,7 @@ class Form {
 		bool getIsSigned() const;
 		const int &getSignGrade() const;
 		const int &getExecGrade() const;
-		void beSigned(Bureaucrat &bureaucrat);
+		void beSigned(Bureaucrat const &bureaucrat);
 		class GradeTooHighException : public std::exception {
 			public:
 				virtual const char *what() const throw();

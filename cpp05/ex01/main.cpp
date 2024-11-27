@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:38:49 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 15:55:07 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:51:25 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,44 +23,15 @@ int main(void)
 	Form f2("F2", 10, 1);
 
 	try {
-		Form f1("F1", 0, 1);
-	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	try {
-		Form f2("F2", 1, 0);
-	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	try {
-		Form f3("F3", 151, 1);
-	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	try {
-		Form f4("F4", 1, 151);
-	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	try {
-		f.beSigned(a);
-	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	try {
-		f.beSigned(b);
-	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
-	}
-	try {
 		a.signForm(f);
+		std::cout << a.getName() << " signed " << f.getName() << std::endl;
 	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 	}
 	try {
-	a.signForm(f2);
-	} catch (std::exception &e) {
-		std::cerr << e.what() << std::endl;
+		b.signForm(f2);
+	} catch(std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 	return 0;
 }

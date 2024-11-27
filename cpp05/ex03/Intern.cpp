@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 02:08:36 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/02 16:15:43 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:26:42 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,36 @@ Intern &Intern::operator=(const Intern &other) {
 	return *this;
 }
 
+AForm *Intern::makePresidentialPardonForm(const std::string &target) {
+	return new PresidentialPardonForm(target);
+}
+
+AForm *Intern::makeRobotomyRequestForm(const std::string &target) {
+	return new RobotomyRequestForm(target);
+}
+
+AForm *Intern::makeShrubberyCreationForm(const std::string &target) {
+	return new ShrubberyCreationForm(target);
+}
+
 AForm *Intern::makeForm(std::string name, std::string target) {
-	if (name == "PresidentialPardonForm") {
-		return new PresidentialPardonForm(target);
-	} else if (name == "RobotomyRequestForm") {
-		return new RobotomyRequestForm(target);
-	} else if (name == "ShrubberyCreationForm") {
-		return new ShrubberyCreationForm(target);
-	} else {
-		std::cerr << "Invalid form name" << std::endl;
+	const int formNumber = 3;
+	std::string form_names[formNumber] = {
+		"PresidentialPardonForm",
+		"RobotomyRequestForm",
+		"ShrubberyCreationForm"
+	};
+	AForm *(*form_creators[formNumber])(const std::string &target) = {
+		makePresidentialPardonForm,
+		makeRobotomyRequestForm,
+		makeShrubberyCreationForm
+	};
+	for (int i = 0; i < formNumber; i++) {
+		if (name == form_names[i]) {
+			std::cout << "Intern creates " << form_names[i] << std::endl;
+			return (form_creators[i])(target);
+		}
 	}
+	std::cout << "Intern cannot create " << name << std::endl;
 	return NULL;
 }

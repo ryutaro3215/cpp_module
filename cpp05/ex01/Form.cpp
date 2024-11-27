@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:37:46 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 15:31:43 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:53:03 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,25 @@ const char *Form::GradeTooLowException::what() const throw() {
 	return "Grade is too low";
 }
 
-Form::Form() : name_("default"), isSigned_(false), signGrade_(150), execGrade_(150) {
-	std::cout << "Form default constructor called" << std::endl;
-}
+Form::Form() : name_("default"), isSigned_(false), signGrade_(150), execGrade_(150) {}
 
 Form::Form(const std::string name, const int signGrade, const int execGrade) : name_(name), isSigned_(false), signGrade_(signGrade), execGrade_(execGrade) {
-	std::cout << "Form constructor called" << std::endl;
 	if (signGrade_ < 1 || execGrade < 1)
 		throw Form::GradeTooHighException();
 	else if (signGrade_ > 150 || execGrade > 150)
 		throw Form::GradeTooLowException();
 }
 
-Form::Form(const Form &other) : name_(other.name_), isSigned_(other.isSigned_), signGrade_(other.signGrade_), execGrade_(other.execGrade_) {
-	std::cout << "Form copy constructor called" << std::endl;
-}
+Form::Form(const Form &other) : name_(other.name_), isSigned_(other.isSigned_), signGrade_(other.signGrade_), execGrade_(other.execGrade_) {}
 
 Form &Form::operator=(const Form &other) {
-	std::cout << "Form assignment operator called" << std::endl;
 	if (this == &other)
 		return *this;
 	isSigned_ = other.isSigned_;
 	return *this;
 }
 
-Form::~Form() {
-	std::cout << "Form destructor called" << std::endl;
-}
+Form::~Form() {}
 
 const std::string &Form::getName() const {
 	return name_;
@@ -65,7 +57,7 @@ const int &Form::getExecGrade() const {
 	return execGrade_;
 }
 
-void Form::beSigned(Bureaucrat &bureaucrat) {
+void Form::beSigned(Bureaucrat const &bureaucrat) {
 	if (bureaucrat.getGrade() > signGrade_)
 		throw Form::GradeTooLowException();
 	isSigned_ = true;

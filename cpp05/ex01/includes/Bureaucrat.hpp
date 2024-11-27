@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:43:55 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/28 14:48:06 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/27 17:40:48 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ class Bureaucrat {
 	private:
 		const std::string name_;
 		int grade_;
-	public:
 		Bureaucrat();
+	public:
 		Bureaucrat(const std::string name, int grade);
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat &other);
