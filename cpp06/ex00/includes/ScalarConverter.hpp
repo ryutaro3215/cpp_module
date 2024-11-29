@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:12:53 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/26 10:41:13 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:45:39 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ class ScalarConverter {
 
 bool isNanorInf(std::string &str);
 void Print(Attribution &attr, std::string &str);
+int stringToInt(std::string &str);
+float stringToFloat(std::string &str);
+double stringToDouble(std::string &str);
 #endif
 
