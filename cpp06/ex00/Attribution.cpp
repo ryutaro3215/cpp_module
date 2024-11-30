@@ -6,11 +6,11 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:16:13 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/26 11:15:22 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:32:25 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/Attribution.hpp"
+#include "Attribution.hpp"
 
 Attribution::Attribution() {};
 

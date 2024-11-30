@@ -6,11 +6,11 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:32:42 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/26 11:32:08 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:32:18 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ScalarConverter.hpp"
+#include "ScalarConverter.hpp"
 #include <iostream>
 
 
