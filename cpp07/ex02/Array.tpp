@@ -6,9 +6,12 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 17:34:42 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/12/04 19:53:18 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/12/05 01:21:59 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef ARRAY_TPP
+# define ARRAY_TPP
 
 #include "Array.hpp"
 
@@ -62,7 +65,16 @@ const T &Array<T>::operator[](unsigned int index) const {
 }
 
 template <typename T>
+T &Array<T>::getArray(unsigned int index) {
+	if (index >= size())
+		throw std::out_of_range("Index out of range");
+	return m_array[index];
+}
+
+template <typename T>
 const T &Array<T>::getArray(unsigned int index) const {
+	if (index >= size())
+		throw std::out_of_range("Index out of range");
 	return m_array[index];
 }
 
@@ -70,3 +82,5 @@ const T &Array<T>::getArray(unsigned int index) const {
 /* std::ostream &operator<<(std::ostream &out, const T &array) { */
 /* 	out << array.getArray(); */
 /* } */
+
+#endif

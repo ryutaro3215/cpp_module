@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 17:34:19 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/12/04 19:52:50 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/12/04 23:50:52 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Array {
 		T &operator[](unsigned int index);
 		const T &operator[](unsigned int index) const;
 		size_t size() const;
+		T &getArray(unsigned int index);
 		const T &getArray(unsigned int index) const;
 };
 
