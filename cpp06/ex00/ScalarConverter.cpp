@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:18:51 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/12/02 12:19:43 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:56:26 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,11 @@ Attribution ScalarConverter::isDoubleConvertable(std::string &str) {
 }
 
 int stringToInt(std::string &str) {
+	if (!isValideNumber(str))
+		throw std::invalid_argument("Invalid argument");
+
 	std::istringstream iss(str);
 	long long i;
-
 	iss >> i;
 	if (iss.fail())
 		throw std::invalid_argument("Invalid argument");
@@ -126,8 +128,8 @@ float stringToFloat(std::string &str) {
 		return INFINITY;
 	if (str == "-inf" || str == "-inff")
 		return -INFINITY;
-	if (str[str.size() - 1] == 'f')
-		str = str.substr(0, str.size() - 1);
+	if (!isValideNumber(str))
+		throw std::invalid_argument("Invalid argument");
 	std::istringstream iss(str);
 	iss >> f;
 	if (iss.fail())
@@ -142,6 +144,8 @@ double stringToDouble(std::string &str) {
 		return INFINITY;
 	if (str == "-inf" || str == "-inff")
 		return -INFINITY;
+	if (!isValideNumber(str))
+		throw std::invalid_argument("Invalid argument");
 	std::istringstream iss(str);
 	iss >> d;
 	if (iss.fail())
@@ -156,19 +160,38 @@ bool isNanorInf(std::string &str) {
 	return false;
 }
 
-bool isInvalideNumber(std::string &str) {
+bool isValideNumber(std::string &str) {
 	if (str.empty())
 		return false;
 	size_t start = str.find_first_not_of(" \t");
 	size_t end = str.find_last_not_of(" \t");
 	std::string sub = str.substr(start, end - start + 1);
-	bool isDigit = false;
 	bool isf = false;
-	size_t n = str.length
-		for (size_t i = 0; i < n; i++) {
-			char c = str[i];
-
+	size_t n = sub.length();
+	for (size_t i = 0; i < n; i++) {
+		char c = str[i];
+		/* std::cout << c << std::endl; */
+		if ((c == '+' || c == '-') && (i != 0)) {
+				std::cout << "plus or minus" << std::endl;
+				return false;
 		}
+		else if (c == '.') {
+			if (isf) {
+				std::cout << "dot" << std::endl;
+				return false;
+			}
+			isf = true;
+		}
+		else if (i == sub.size() - 1 && (c == 'f' || c == 'F')) {
+			/* std::cout << "f" << std::endl; */
+			return true;
+		}
+		else if (!isdigit(c)) {
+			/* std::cout << c << std::endl; */
+			return false;
+		}
+	}
+	return true;
 }
 
 void Print(Attribution &attr, std::string &str) {
