@@ -1,6 +1,6 @@
 CXX = c++
 CXXFLAG = -Wall -Wextra -Werror -std=c++98
-NAME = a.out
+NAME = a.out 
 SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)
 SRC = $(shell find . $(SRCDIR) -name "*.cpp" -type f | xargs)
 OBJDIR = objs
