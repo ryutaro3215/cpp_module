@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:18:51 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/12/02 12:19:43 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/11/30 23:52:55 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,31 +120,31 @@ int stringToInt(std::string &str) {
 }
 
 float stringToFloat(std::string &str) {
+	std::istringstream iss(str);
 	float f;
 
 	if (str == "+inf" || str == "+inff")
 		return INFINITY;
 	if (str == "-inf" || str == "-inff")
 		return -INFINITY;
-	if (str[str.size() - 1] == 'f')
-		str = str.substr(0, str.size() - 1);
-	std::istringstream iss(str);
 	iss >> f;
-	if (iss.fail())
+	std::cout << f << std::endl;
+	if (iss.fail() && str[str.size() - 1] != 'f')
 		throw std::invalid_argument("Invalid argument");
 	return f;
 }
 
 double stringToDouble(std::string &str) {
+	std::istringstream iss(str);
 	double d;
 
 	if (str == "+inf" || str == "+inff")
 		return INFINITY;
 	if (str == "-inf" || str == "-inff")
 		return -INFINITY;
-	std::istringstream iss(str);
 	iss >> d;
-	if (iss.fail())
+	std::cout << d << std::endl;
+	if (iss.fail() && str[str.size() - 1] != 'f')
 		throw std::invalid_argument("Invalid argument");
 	return d;
 }
@@ -154,21 +154,6 @@ bool isNanorInf(std::string &str) {
 		|| str == "+inff" || str == "-inf" || str == "-inff")
 		return true;
 	return false;
-}
-
-bool isInvalideNumber(std::string &str) {
-	if (str.empty())
-		return false;
-	size_t start = str.find_first_not_of(" \t");
-	size_t end = str.find_last_not_of(" \t");
-	std::string sub = str.substr(start, end - start + 1);
-	bool isDigit = false;
-	bool isf = false;
-	size_t n = str.length
-		for (size_t i = 0; i < n; i++) {
-			char c = str[i];
-
-		}
 }
 
 void Print(Attribution &attr, std::string &str) {
@@ -181,7 +166,7 @@ void Print(Attribution &attr, std::string &str) {
 	else if (attr.getAttrKind() == INT)
 		std::cout << static_cast<int>(stringToInt(str)) << std::endl;
 	else if (attr.getAttrKind() == FLOAT) {
-		std::cout << std::fixed;
+		std::cout << std::fixed << std::setprecision(1);
 		std::cout << static_cast<float>(stringToFloat(str)) << 'f' << std::endl;
 	}
 	else if (attr.getAttrKind() == DOUBLE)
