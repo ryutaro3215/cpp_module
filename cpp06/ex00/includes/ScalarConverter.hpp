@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 17:12:53 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/12/01 19:48:27 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:32:26 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void Print(Attribution &attr, std::string &str);
 int stringToInt(std::string &str);
 float stringToFloat(std::string &str);
 double stringToDouble(std::string &str);
-bool isInvalideNumber(std::string &str);
+bool isValideNumber(std::string &str);
 #endif
 
