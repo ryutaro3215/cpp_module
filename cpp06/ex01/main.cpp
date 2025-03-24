@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 18:33:39 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/27 19:22:20 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:32:36 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,10 @@ int main(void) {
 	Data *deserialized = Serializer::deserialize(raw);
 	std::cout << "deserialize address: " << deserialized 
 		<< std::endl;
+	Data *deserialized2 = Serializer::deserialize(raw);
+	std::cout << "deserialize address: " << deserialized2 
+		<< std::endl;
+	uintptr_t raw2 = Serializer::serialize(deserialized);
+	std::cout << "serialized number: " << raw2 << std::endl;
+	delete data;
 }
