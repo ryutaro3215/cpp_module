@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:18:51 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/12/04 15:56:26 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2025/02/19 09:54:49 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,11 @@ Attribution ScalarConverter::isDoubleConvertable(std::string &str) {
 int stringToInt(std::string &str) {
 	if (!isValideNumber(str))
 		throw std::invalid_argument("Invalid argument");
-
 	std::istringstream iss(str);
 	long long i;
 	iss >> i;
+	if (i > INT_MAX || i < INT_MIN)
+		throw std::invalid_argument("Invalid argument");
 	if (iss.fail())
 		throw std::invalid_argument("Invalid argument");
 	return i;
@@ -134,6 +135,7 @@ float stringToFloat(std::string &str) {
 	iss >> f;
 	if (iss.fail())
 		throw std::invalid_argument("Invalid argument");
+	std::cout << "return: " << f << std::endl;
 	return f;
 }
 
@@ -177,20 +179,23 @@ bool isValideNumber(std::string &str) {
 		}
 		else if (c == '.') {
 			if (isf) {
-				std::cout << "dot" << std::endl;
 				return false;
 			}
 			isf = true;
 		}
 		else if (i == sub.size() - 1 && (c == 'f' || c == 'F')) {
 			/* std::cout << "f" << std::endl; */
+			/* if (n >= 10) */
+			/* 	return false; */
 			return true;
 		}
-		else if (!isdigit(c)) {
-			/* std::cout << c << std::endl; */
+		else if (!isdigit(c) && c != '+' && c != '-') {
+			std::cout << "it is not digit" << std::endl;
 			return false;
 		}
 	}
+	if (n >= 15)
+		return false;
 	return true;
 }
 
@@ -204,7 +209,7 @@ void Print(Attribution &attr, std::string &str) {
 	else if (attr.getAttrKind() == INT)
 		std::cout << static_cast<int>(stringToInt(str)) << std::endl;
 	else if (attr.getAttrKind() == FLOAT) {
-		std::cout << std::fixed;
+		std::cout << std::fixed << std::setprecision(1);
 		std::cout << static_cast<float>(stringToFloat(str)) << 'f' << std::endl;
 	}
 	else if (attr.getAttrKind() == DOUBLE)
