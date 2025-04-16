@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 16:38:28 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/12/04 16:46:25 by rmatsuba         ###   ########.fr       */
+/*   Created: 2025/04/16 16:38:59 by rmatsuba          #+#    #+#             */
+/*   Updated: 2025/04/16 16:39:08 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#include "BitcoinExchange.hpp"
 
-# include <string>
-
-template <typename T>
-void swap(T &a, T &b) {
-	T tmp = a;
-	a = b;
-	b = tmp;
+int main(int argc, char **argv) {
+	if (argc != 2) {
+		std::cerr << "Error: could not open file" << std::endl;
+		return 1;
+	}
+	BTC btc;
+	btc.executeExchange(argv[1]);
+	return 0;
 }
-
-template <typename T>
-T min(T a, T b) {
-	return (a < b ? a : b);
-}
-
-template <typename T>
-T max(T a, T b) {
-	return (a > b ? a : b);
-}
-
-#endif
