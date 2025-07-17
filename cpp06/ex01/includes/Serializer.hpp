@@ -15,6 +15,7 @@
 
 #include <string>
 #include <typeinfo>
+#include <stdint.h>
 #include "Data.hpp"
 
 class Serializer {

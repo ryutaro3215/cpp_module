@@ -22,5 +22,12 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	ScalarConverter::convert(argv[1]);
+	// std::string str = argv[1];
+	// bool isValid = isValideNumber(str);
+	// if (!isValid)
+	// {
+	// 	std::cerr << "Error: Invalid argument" << std::endl;
+	// 	return 1;
+	// }
 	return 0;
 }

@@ -37,15 +37,16 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other) {
 }
 
 void ScalarConverter::convert(std::string str) {
-	ScalarConverter *converter = new ScalarConverter(str);
+	std::string trimmedStr = trim(str);
+	ScalarConverter *converter = new ScalarConverter(trimmedStr);
 	std::cout << "char: ";
-	Print(converter->m_checker->charConvertable, str);
+	Print(converter->m_checker->charConvertable, trimmedStr);
 	std::cout << "Int: ";
-	Print(converter->m_checker->intConvertable, str);
+	Print(converter->m_checker->intConvertable, trimmedStr);
 	std::cout << "float: ";
-	Print(converter->m_checker->floatConvertable, str);
+	Print(converter->m_checker->floatConvertable, trimmedStr);
 	std::cout << "double: ";
-	Print(converter->m_checker->doubleConvertable, str);
+	Print(converter->m_checker->doubleConvertable, trimmedStr);
 }
 
 ConvertableCheck* ScalarConverter::checkConvertable(std::string &str) {
@@ -113,7 +114,7 @@ int stringToInt(std::string &str) {
 	if (!isValideNumber(str))
 		throw std::invalid_argument("Invalid argument");
 	std::istringstream iss(str);
-	long long i;
+	long i;
 	iss >> i;
 	if (i > INT_MAX || i < INT_MIN)
 		throw std::invalid_argument("Invalid argument");
@@ -135,7 +136,7 @@ float stringToFloat(std::string &str) {
 	iss >> f;
 	if (iss.fail())
 		throw std::invalid_argument("Invalid argument");
-	std::cout << "return: " << f << std::endl;
+	// std::cout << "return: " << f << std::endl;
 	return f;
 }
 
@@ -170,11 +171,16 @@ bool isValideNumber(std::string &str) {
 	std::string sub = str.substr(start, end - start + 1);
 	bool isf = false;
 	size_t n = sub.length();
+	if (str.length() == 3 && sub[0] == '\'' && sub[n - 1] == '\'') {
+		if (n != 3)
+			return false;
+		if (sub[1] < 32 || sub[1] > 126)
+			return false;
+		return true;
+	}
 	for (size_t i = 0; i < n; i++) {
-		char c = str[i];
-		/* std::cout << c << std::endl; */
+		char c = sub[i];
 		if ((c == '+' || c == '-') && (i != 0)) {
-				std::cout << "plus or minus" << std::endl;
 				return false;
 		}
 		else if (c == '.') {
@@ -189,8 +195,7 @@ bool isValideNumber(std::string &str) {
 			/* 	return false; */
 			return true;
 		}
-		else if (!isdigit(c) && c != '+' && c != '-') {
-			std::cout << "it is not digit" << std::endl;
+		else if (!isdigit(c) && c != '+' && c != '-' && c != '\'') {
 			return false;
 		}
 	}
@@ -199,26 +204,43 @@ bool isValideNumber(std::string &str) {
 	return true;
 }
 
+std::string trim(std::string str) {
+	size_t start = str.find_first_not_of(" \t");
+	size_t end = str.find_last_not_of(" \t");
+	if (start == std::string::npos || end == std::string::npos)
+		return "";
+	if (str[start] == '\'' && str[end] == '\'') {
+		if (end - start != 2)
+			return "";
+		return str.substr(start + 1, end - start - 1);
+	}
+	return str.substr(start, end - start + 1);
+}
+
 void Print(Attribution &attr, std::string &str) {
-	if (attr.getAttrKind() == CHAR) {
-		if (std::isprint(stringToInt(str)) && stringToInt(str) != 0)
-			std::cout << "'" << static_cast<char>(stringToInt(str)) << "'" << std::endl;
-		else
-			std::cout << "Non displayable" << std::endl;
+	try {
+		if (attr.getAttrKind() == CHAR) {
+			if (std::isprint(stringToInt(str)) && stringToInt(str) != 0)
+				std::cout << "'" << static_cast<char>(stringToInt(str)) << "'" << std::endl;
+			else
+				std::cout << "Non displayable" << std::endl;
+		}
+		else if (attr.getAttrKind() == INT)
+			std::cout << static_cast<int>(stringToInt(str)) << std::endl;
+		else if (attr.getAttrKind() == FLOAT) {
+			std::cout << std::fixed << std::setprecision(1);
+			std::cout << static_cast<float>(stringToFloat(str)) << 'f' << std::endl;
+		}
+		else if (attr.getAttrKind() == DOUBLE)
+			std::cout << static_cast<double>(stringToDouble(str)) << std::endl;
+		else if (attr.getAttrKind() == NANORINF)
+			std::cout << "impossible" << std::endl;
+		else if (attr.getAttrKind() == IMP)
+			std::cout << "impossible" << std::endl;
+		else if (attr.getAttrKind() == NUM)
+			std::cout << "impossible" << std::endl;
+	} catch (std::exception &e) {
+		std::cout << "impossible" << std::endl;
 	}
-	else if (attr.getAttrKind() == INT)
-		std::cout << static_cast<int>(stringToInt(str)) << std::endl;
-	else if (attr.getAttrKind() == FLOAT) {
-		std::cout << std::fixed << std::setprecision(1);
-		std::cout << static_cast<float>(stringToFloat(str)) << 'f' << std::endl;
-	}
-	else if (attr.getAttrKind() == DOUBLE)
-		std::cout << static_cast<double>(stringToDouble(str)) << std::endl;
-	else if (attr.getAttrKind() == NANORINF)
-		std::cout << "impossible" << std::endl;
-	else if (attr.getAttrKind() == IMP)
-		std::cout << "impossible" << std::endl;
-	else if (attr.getAttrKind() == NUM)
-		std::cout << "impossible" << std::endl;
 }
 
