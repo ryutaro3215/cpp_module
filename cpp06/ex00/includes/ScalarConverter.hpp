@@ -39,6 +39,7 @@ class ScalarConverter {
 		static void convert(std::string str);
 };
 
+std::string trim(std::string str);
 bool isNanorInf(std::string &str);
 void Print(Attribution &attr, std::string &str);
 int stringToInt(std::string &str);

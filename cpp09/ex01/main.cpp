@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 19:03:53 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/11/27 19:15:51 by rmatsuba         ###   ########.fr       */
+/*   Created: 2025/04/19 14:12:29 by rmatsuba          #+#    #+#             */
+/*   Updated: 2025/04/19 16:45:22 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#include "RPN.hpp"
 
-#include <string>
-#include <typeinfo>
-#include <stdint.h>
-#include "Data.hpp"
-
-class Serializer {
-	private:
-		Serializer();
-		~Serializer();
-		Serializer(const Serializer &src);
-		Serializer &operator=(const Serializer &src);
-	public:
-		static uintptr_t serialize(Data *ptr);
-		static Data *deserialize(uintptr_t raw);
-};
-
-#endif
+int main(int argc, char **argv) {
+	if (argc != 2) {
+		std::cerr << "Usage: " << argv[0] << " <expression>" << std::endl;
+		return 1;
+	}
+	RPN rpn;
+	rpn.calculate(argv[1]);
+	return 0;
+}

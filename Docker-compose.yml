@@ -1,0 +1,12 @@
+# ubuntu-env/docker-compose.yml
+version: "3.8"
+services:
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ubuntu-22.04.5
+    volumes:
+      - ./:/app
+    tty: true
+
