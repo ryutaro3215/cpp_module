@@ -1,36 +1,62 @@
 CXX = c++
-CXXFLAG = -Wall -Wextra -Werror -std=c++98
-NAME = a.out 
-# SRCDIR = $(shell find . -type d  -not -name "includes" -not -path ".*" | xargs)
-# SRC = $(shell find . $(SRCDIR) -name "*.cpp" -type f | xargs)
-SRC = Attribution.cpp ScalarConverter.cpp main.cpp
-OBJDIR = objs
-OBJ = $(SRC:%.cpp=$(OBJDIR)/%.o)
-INCLUDE = -I includes
+SRCDIR = srcs
+OBJS_DIR = objs
+INCLUDES = -I includes
+NAME = a.out
 
+# 通常ビルド用
+# SRCS = $(shell find $(SRCDIR) -name "*.cpp")
+SRCS = main.cpp ScalarConverter.cpp
+OBJS = $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-vpath	$(SRCDIR)
+# テストビルド用（CMakeに渡す）
+TEST_CXXFLAGS = -std=c++17
+TEST_INCLUDES = \
+  -Iincludes \
+  -Ibuild/_deps/googletest-src/googletest/include \
+  -Ibuild/_deps/googletest-src/googletest \
+  -Ibuild/_deps/googletest-src/googlemock/include
+
+.PHONY: all clean fclean re test runtest
+
+vpath $(SRCDIR)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CXX) $(CXXFLAG) $(OBJ) $(INCLUDE) $(LIBRARY) -o $(NAME)
-	@echo "Compilation done"
+$(NAME): $(OBJS)
+	@$(CXX) $(CXXFLAGS) $(OBJS) $(INCLUDES) -o $(NAME)
+	@echo "Build complete: $(NAME)"
 
-$(OBJDIR)/%.o: %.cpp
+$(OBJS_DIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(dir $@)
-	@$(CXX) $(CXXFLAG) $(INCLUDE) -c $< -o $@
-	@echo "Compiled "$<" successfully"
+	@$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+	@echo "Compiled: $< successfully"
 
 clean:
-	@rm -rf $(OBJDIR)
-	@echo "Objs deleted"
-	@echo "Clean done"
+	@rm -rf $(OBJS_DIR)
+	@echo "Cleaned up object files"
 
 fclean: clean
-	@rm -rf $(NAME)
-	@echo "Fclean done"
+	@rm -f $(NAME)
+	@echo "Cleaned up executable"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# ================================
+# テスト関連
+# ================================
+
+test:
+	@echo "Building tests with CMake..."
+	cmake -S . -B build -DCMAKE_CXX_STANDARD=17
+	cmake --build build
+	@echo "Tests built successfully"
+
+runtest: test
+	@echo "Running tests..."
+	cd build && ctest --output-on-failure
+
+clean_test:
+	@rm -rf build
+	@echo "Cleaned up test build directory"

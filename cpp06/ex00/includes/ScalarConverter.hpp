@@ -1,50 +1,47 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 17:12:53 by rmatsuba          #+#    #+#             */
-/*   Updated: 2025/02/17 18:01:52 by rmatsuba         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
-
-#include "Attribution.hpp"
+#include <iostream>
 #include <string>
+#include <sstream>
 
-typedef struct isConvertable {
-	Attribution charConvertable;
-	Attribution intConvertable;
-	Attribution floatConvertable;
-	Attribution doubleConvertable;
-} ConvertableCheck;
 
-class ScalarConverter {
-	private:
-		ConvertableCheck *m_checker;
-		ScalarConverter(std::string str);
-		~ScalarConverter();
-		ScalarConverter(const ScalarConverter &other);
-		ScalarConverter &operator=(const ScalarConverter &other);
-		ConvertableCheck* checkConvertable(std::string &str);
-		Attribution isCharConvertable(std::string &str);
-		Attribution isIntConvertable(std::string &str);
-		Attribution isFloatConvertable(std::string &str);
-		Attribution isDoubleConvertable(std::string &str);
-	public:
-		static void convert(std::string str);
+enum ConversionType {
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	INF,
+	NANN,
+	OTHER
 };
 
-std::string trim(std::string str);
-bool isNanorInf(std::string &str);
-void Print(Attribution &attr, std::string &str);
-int stringToInt(std::string &str);
-float stringToFloat(std::string &str);
-double stringToDouble(std::string &str);
-bool isValideNumber(std::string &str);
-#endif
+class ScalarConverter
+{
+private:
+		ScalarConverter();
+		ScalarConverter(const ScalarConverter &other);
+		ScalarConverter &operator=(const ScalarConverter &other);
+		~ScalarConverter();
+public:
+		static void convert(const char *input);
+};
 
+bool isValidInput(const std::string &input);
+std::string trimSpaces(const std::string &input);
+bool isNan(const std::string &input);
+bool isInf(const std::string &input);
+bool isChar(const std::string &input);
+bool isInt(const std::string &input);
+bool isFloat(const std::string &input);
+bool isDouble(const std::string &input);
+int checkInputType(const std::string &input);
+char strToChar(const std::string &input);
+int strToInt(const std::string &input);
+float strToFloat(const std::string &input);
+double strToDouble(const std::string &input);
+std::string convertToChar(const std::string &input, int type);
+std::string convertToInt(const std::string &input, int type);
+std::string convertToFloat(const std::string &input, int type);
+std::string convertToDouble(const std::string &input, int type);
+
+#endif
