@@ -73,22 +73,22 @@ std::string convertToInt(const std::string &input, int type) {
 	if (type == NANN || type == INF || type == OTHER)
 		return "impossible";
 	else if (type == CHAR) {
-		return std::to_string(static_cast<int>(strToChar(input)));
+		return toString(static_cast<int>(strToChar(input)));
 	} else if (type == INT) {
 		try {
-			return std::to_string(strToInt(input));
+			return toString(strToInt(input));
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
 	} else if (type == FLOAT) {
 		try {
-				return std::to_string(static_cast<int>(strToFloat(input)));
+				return toString(static_cast<int>(strToFloat(input)));
 		} catch (const std::invalid_argument &e) { 
 			return "impossible";
 		}
 	} else if (type == DOUBLE) {
 		try {
-			return std::to_string(static_cast<int>(strToDouble(input)));
+			return toString(static_cast<int>(strToDouble(input)));
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
@@ -106,25 +106,25 @@ std::string convertToFloat(const std::string &input, int value) {
 			return "-inff";
 	else if (value == CHAR) {
 		try {
-			return std::to_string(static_cast<float>(strToChar(input))) + "f";
+			return toString(static_cast<float>(strToChar(input))) + "f";
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
 	} else if (value == INT) {
 		try {
-			return std::to_string(static_cast<float>(strToInt(input))) + "f";
+			return toString(static_cast<float>(strToInt(input))) + "f";
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
 	} else if (value == FLOAT) {
 		try {
-			return std::to_string(strToFloat(input)) + "f";
+			return toString(strToFloat(input)) + "f";
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
 	} else if (value == DOUBLE) {
 		try {
-			return std::to_string(static_cast<float>(strToDouble(input))) + "f";
+			return toString(static_cast<float>(strToDouble(input))) + "f";
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
@@ -142,25 +142,25 @@ std::string convertToDouble(const std::string &input, int value) {
 			return "-inf";
 	else if (value == CHAR) {
 		try {
-			return std::to_string(static_cast<double>(strToChar(input)));
+			return toString(static_cast<double>(strToChar(input)));
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
 	} else if (value == INT) {
 		try {
-			return std::to_string(static_cast<double>(strToInt(input)));
+			return toString(static_cast<double>(strToInt(input)));
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
 	} else if (value == FLOAT) {
 		try {
-			return std::to_string(static_cast<double>(strToFloat(input)));
+			return toString(static_cast<double>(strToFloat(input)));
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
 	} else if (value == DOUBLE) {
 		try {
-			return std::to_string(strToDouble(input));
+			return toString(strToDouble(input));
 		} catch (const std::invalid_argument &e) {
 			return "impossible";
 		}
@@ -230,8 +230,8 @@ bool isInf(const std::string &input) {
 }
 
 bool isChar(const std::string &input) {
-	if (input.length() == 1 && isprint(input[0]) && !isdigit(input[0]))
-		return true; 
+	// if (input.length() == 1 && isprint(input[0]) && !isdigit(input[0]))
+	// 	return true; 
 	if (input.length() == 3 && input[0] == '\'' && input[2] == '\'' && isprint(input[1])) {
 		return true; // Handle single character with quotes
 	}
@@ -323,6 +323,21 @@ std::string trimSpaces(const std::string &input) {
 	}
 	return input.substr(start, end - start + 1);
 }
+
+template <typename T>
+std::string toString(T value) {
+	std::ostringstream oss;
+	if (value == static_cast<long>(value))
+		oss << std::fixed << std::setprecision(1); // Ensure one decimal place for float
+	oss << value;
+	return oss.str();
+}
+
+
+
+
+
+
 
 
 

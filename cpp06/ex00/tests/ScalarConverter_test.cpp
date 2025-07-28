@@ -190,29 +190,29 @@ TEST(print_test, print_int) {
 }
 
 TEST(print_test, print_float) {
-	EXPECT_EQ(convertToFloat("0.0f", FLOAT), "0.000000f");
-	EXPECT_EQ(convertToFloat("3.14f", FLOAT), "3.140000f");
-	EXPECT_EQ(convertToFloat("3.14", DOUBLE), "3.140000f");
-	EXPECT_EQ(convertToFloat("42", INT), "42.000000f");
+	EXPECT_EQ(convertToFloat("0.0f", FLOAT), "0.0f");
+	EXPECT_EQ(convertToFloat("3.14f", FLOAT), "3.14f");
+	EXPECT_EQ(convertToFloat("3.14", DOUBLE), "3.14f");
+	EXPECT_EQ(convertToFloat("42", INT), "42.0f");
 	EXPECT_EQ(convertToFloat("nan", NANN), "nanf");
 	EXPECT_EQ(convertToFloat("nanf", NANN), "nanf");
 	EXPECT_EQ(convertToFloat("inff", INF), "inff");
 	EXPECT_EQ(convertToFloat("inf", INF), "inff");
-	EXPECT_EQ(convertToFloat("'a'", CHAR), "97.000000f"); // ASCII value of 'a'
-	EXPECT_EQ(convertToFloat("'1'", CHAR), "49.000000f"); // ASCII value of '1'
+	EXPECT_EQ(convertToFloat("'a'", CHAR), "97.0f"); // ASCII value of 'a'
+	EXPECT_EQ(convertToFloat("'1'", CHAR), "49.0f"); // ASCII value of '1'
 }
 
 TEST(print_test, print_double) {
-	EXPECT_EQ(convertToDouble("0.0", DOUBLE), "0.000000");
-	EXPECT_EQ(convertToDouble("3.14", DOUBLE), "3.140000");
-	EXPECT_EQ(convertToDouble("3.14f", FLOAT), "3.140000");
-	EXPECT_EQ(convertToDouble("42", INT), "42.000000");
+	EXPECT_EQ(convertToDouble("0.0", DOUBLE), "0.0");
+	EXPECT_EQ(convertToDouble("3.14", DOUBLE), "3.14");
+	EXPECT_EQ(convertToDouble("3.14f", FLOAT), "3.14");
+	EXPECT_EQ(convertToDouble("42", INT), "42.0");
 	EXPECT_EQ(convertToDouble("nan", NANN), "nan");
 	EXPECT_EQ(convertToDouble("nanf", NANN), "nan");
 	EXPECT_EQ(convertToDouble("inff", INF), "inf");
 	EXPECT_EQ(convertToDouble("inf", INF), "inf");
-	EXPECT_EQ(convertToDouble("'a'", CHAR), "97.000000"); // ASCII value of 'a'
-	EXPECT_EQ(convertToDouble("'1'", CHAR), "49.000000"); // ASCII value of '1'
+	EXPECT_EQ(convertToDouble("'a'", CHAR), "97.0"); 
+	EXPECT_EQ(convertToDouble("'1'", CHAR), "49.0"); 
 }
 
 

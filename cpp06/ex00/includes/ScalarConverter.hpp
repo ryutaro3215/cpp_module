@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 
 enum ConversionType {
@@ -43,5 +44,7 @@ std::string convertToChar(const std::string &input, int type);
 std::string convertToInt(const std::string &input, int type);
 std::string convertToFloat(const std::string &input, int type);
 std::string convertToDouble(const std::string &input, int type);
+template <typename T>
+std::string toString(T value);
 
 #endif
