@@ -8,7 +8,7 @@ NAME = a.out
 # SRCS = $(shell find $(SRCDIR) -name "*.cpp")
 SRCS = main.cpp ScalarConverter.cpp
 OBJS = $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 # テストビルド用（CMakeに渡す）
 TEST_CXXFLAGS = -std=c++17
