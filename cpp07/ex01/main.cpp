@@ -23,22 +23,22 @@ int main(void) {
 
 	{
 		std::cout << "int array: ";
-		iter(array1, 5, print);
+		iter(array1, 5, print<int>);
 		std::cout << std::endl;
 	}
 	{
 		std::cout << "char array: ";
-		iter(array2, 5, print);
+		iter(array2, 5, print<char>);
 		std::cout << std::endl;
 	}
 	{
 		std::cout << "string array: ";
-		iter(array3, 5, print);
+		iter(array3, 5, print<std::string>);
 		std::cout << std::endl;
 	}
 	{
 		std::cout << "Test array: ";
-		iter(array4, 5, print);
+		iter(array4, 5, print<Test>);
 		std::cout << std::endl;
 	}
 	return 0;

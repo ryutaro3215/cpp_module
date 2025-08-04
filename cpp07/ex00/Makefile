@@ -5,7 +5,7 @@ NAME = a.out
 SRC = main.cpp 
 OBJDIR = objs
 OBJ = $(SRC:%.cpp=$(OBJDIR)/%.o)
-INCLUDE = -I includes
+INCLUDE = -I .
 
 
 vpath	$(SRCDIR)

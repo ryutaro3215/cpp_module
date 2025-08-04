@@ -48,6 +48,11 @@ int main() {
 
 	std::cout << "\n========== Test: out of bounds access ==========\n";
 	try {
+		std::cout << s[2] << std::endl;
+	} catch (std::out_of_range& e) {
+		std::cout << "Cought exception: " << e.what() << std::endl;
+	}
+	try {
 		std::cout << s[5] << std::endl;
 	} catch (std::out_of_range& e) {
 		std::cout << "Caught exception: " << e.what() << std::endl;
