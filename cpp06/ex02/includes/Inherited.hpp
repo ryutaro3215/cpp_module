@@ -15,7 +15,6 @@
 
 #include "Base.hpp"
 #include <string>
-#include <typeinfo> 
 
 class A : public Base {};
 class B : public Base {};
