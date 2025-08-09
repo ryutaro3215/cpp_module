@@ -49,12 +49,22 @@ int main() {
 	std::cout << "\n========== Test: out of bounds access ==========\n";
 	try {
 		std::cout << s[5] << std::endl;
-	} catch (std::out_of_range& e) {
+	} catch (std::exception& e) {
 		std::cout << "Caught exception: " << e.what() << std::endl;
 	}
 
+std::cout << "\n========== Test: const [] ==========\n";
+	try {
+		Array<int> tmp(3);
+		tmp[0] = 0; tmp[1] = 1; tmp[2] = 2; // ここで代入（const ではない）
+		const Array<int> con = tmp;         // const コピー
+		std::cout << "con[2] = " << con[2] << '\n'; // 読み取りOK
+		std::cout << con.getArray(4) << '\n';       // 例外が投げられる
+	} catch (std::exception const& e) {
+		std::cout << "Caught exception: " << e.what() << '\n';
+	}
+
 	std::cout << "\n========== Test: self-assignment ==========\n";
-	c = c;
 	for (unsigned int i = 0; i < c.size(); ++i)
 		std::cout << "c[" << i << "] = " << c[i] << std::endl;
 

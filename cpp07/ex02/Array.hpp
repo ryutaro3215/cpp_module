@@ -4,6 +4,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <iostream>
 
 template <typename T>
 class Array {
@@ -57,21 +58,21 @@ Array<T>& Array<T>::operator=(const Array& other) {
 template <typename T>
 T& Array<T>::operator[](unsigned int index) {
 	if (index >= m_size)
-		throw std::out_of_range("Index out of range");
+		throw std::exception();
 	return m_array[index];
 }
 
 template <typename T>
 const T& Array<T>::operator[](unsigned int index) const {
 	if (index >= m_size)
-		throw std::out_of_range("Index out of range");
+		throw std::exception();
 	return m_array[index];
 }
 
 template <typename T>
 const T& Array<T>::getArray(unsigned int index) const {
 	if (index >= m_size)
-		throw std::out_of_range("Index out of range");
+		throw std::exception();
 	return m_array[index];
 }
 
