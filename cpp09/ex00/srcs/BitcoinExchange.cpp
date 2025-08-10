@@ -1,6 +1,6 @@
 #include "BitcoinExchange.hpp"
 
-void printBitcoinAmount(std::string input_path, std::map<std::string, float> price_data) {
+void printBitcoinAmount(std::string input_path, std::map<std::string, float>& price_data) {
 	std::ifstream file(input_path);
 	std::string line;
 	std::string output_line;
@@ -23,7 +23,7 @@ void printBitcoinAmount(std::string input_path, std::map<std::string, float> pri
 	}
 }
 
-std::string calcBitcoinVal(std::string date, std::string amount, std::map<std::string, float> price_data) {
+std::string calcBitcoinVal(std::string date, std::string amount, std::map<std::string, float>& price_data) {
 	std::string trimed_date = checkDate(trimSpace(date));
 	if (trimed_date.rfind("Error", 0) == 0)
 		return trimed_date;
@@ -38,7 +38,7 @@ std::string calcBitcoinVal(std::string date, std::string amount, std::map<std::s
 	return trimed_date + " => " + trimed_amount + " = " + str_total_value;
 }
 
-float getRate(std::string date, std::map<std::string, float> price_data) {
+float getRate(std::string date, std::map<std::string, float>& price_data) {
 	float prev_price = 0;
 	for (std::map<std::string, float>::iterator it = price_data.begin(); it != price_data.end(); it++) {
 		if (date.compare(it->first) == 0)
