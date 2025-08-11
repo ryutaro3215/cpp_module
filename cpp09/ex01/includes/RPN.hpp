@@ -1,31 +1,51 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   RPN.hpp                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/19 14:13:12 by rmatsuba          #+#    #+#             */
-/*   Updated: 2025/04/19 15:46:36 by rmatsuba         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef RPN_HPP
+#ifndef  RPN_HPP
 # define RPN_HPP
 
-# include <iostream>
-# include <stack>
-# include <sstream>
+#include <iostream>
 
-class RPN {
+typedef enum {
+	NUM,
+	OPR,
+	ERR,
+} type;
+
+typedef enum {
+	PLUS,
+	MINUX,
+	PROD,
+	DIVI,
+	EXCE,
+} ope;
+
+class rpn {
 	private:
-		std::stack<int> _stack;
+		std::stack<std::string> _stack;
+		size_t _count;
 	public:
-		RPN();
-		RPN(const RPN &src);
-		RPN &operator=(const RPN &src);
-		~RPN();
-		void calculate(const std::string &expression);
+		rpn();
+		~rpn();
+		rpn(const rpn& other);
+		rpn &operator=(const rpn& other);
+		std::string getElement(std::string& input);
+		void calculate(std::string el);
+		void execRPN(std::string input);
+		type checkElType(std::string el);
+		ope checkOperator(std::string op);
+		size_t count_element(const std::string& input);
+	class invalid_expression : public std::exception {
+		public:
+			virtual const char* what() const throw(); 
+	};
+	class invalid_argument : public std::exception {
+		public:
+			virtual const char* what() const throw(); 
+	};
+	class int_overflow : public std::exception {
+		public:
+			virtual const char* what() const throw(); 
+	};
 };
+
+
 
 #endif
