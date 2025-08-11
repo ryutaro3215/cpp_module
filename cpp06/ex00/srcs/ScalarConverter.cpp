@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include <climits>
 
 
 ScalarConverter::ScalarConverter() {}
@@ -46,6 +47,9 @@ std::string convertToChar(const std::string &input, int type) {
 		}
 	else if (type == INT) {
 		try {
+			int i = strToInt(input);
+			if (i < 0 || i > 127)
+				return "Non displayable";
 			char c = static_cast<char>(strToInt(input));
 			if (isprint(c))
 				return std::string(1, c);
@@ -288,10 +292,12 @@ char strToChar(const std::string &input) {
 }
 
 int strToInt(const std::string &input) {
-	int i;
+	long i;
 	std::istringstream iss(input);
 	iss >> i;
 	if (iss.fail() || !iss.eof())
+		throw std::invalid_argument("Invalid integer conversion");
+	if (i > INT_MAX || i < INT_MIN)
 		throw std::invalid_argument("Invalid integer conversion");
 	return i;
 }
