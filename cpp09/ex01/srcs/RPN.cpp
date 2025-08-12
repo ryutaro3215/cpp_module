@@ -122,7 +122,7 @@ std::string rpn::getElement(std::string& input) {
 		k++;
 	std::string el = input.substr(i, k - i);
 	input.erase(0, k);
-	while (!input.empty() && std::isspace(input.front()))
+	while (!input.empty() && std::isspace(input[0]))
 		input.erase(0, 1);
 	return el;
 }
