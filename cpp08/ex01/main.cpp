@@ -53,9 +53,9 @@ int main(void) {
 	}
 	std::cout << "==== MultipleNumber test ====" << std::endl;
 	{
-		Span sp = Span(10);
+		Span sp = Span(10000);
 		std::vector<int> vec;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10000; i++) {
 			vec.push_back(i);
 		}
 		sp.addMultipleNumbers(vec.begin(), vec.end());
