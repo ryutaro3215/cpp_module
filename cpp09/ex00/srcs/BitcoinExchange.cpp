@@ -1,7 +1,7 @@
 #include "BitcoinExchange.hpp"
 
 void printBitcoinAmount(std::string input_path, std::map<std::string, float>& price_data) {
-	std::ifstream file(input_path);
+	std::ifstream file(input_path.c_str());
 	std::string line;
 	std::string output_line;
 

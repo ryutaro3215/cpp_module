@@ -2,7 +2,8 @@
 # define RPN_HPP
 
 #include <iostream>
-
+#include <stack>
+#include <climits>
 typedef enum {
 	NUM,
 	OPR,
