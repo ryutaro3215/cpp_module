@@ -14,7 +14,6 @@
 #include <algorithm>
 #include <vector>
 #include <set>
-#include <array>
 #include <deque>
 #include <list>
 #include "easyfind.hpp"
@@ -28,17 +27,6 @@ int main(void) {
 		vec.push_back(3);
 		try {
 			std::vector<int>::iterator it = easyfind(vec, 4);
-			std::cout << "Found: " << *it << std::endl;
-		} catch (std::exception &e) {
-			std::cout << e.what() << std::endl;
-		}
-	}
-
-	{
-		std::cout << "==== array ====" << std::endl;
-		std::array<int, 3> arr = {1, 2, 3};
-		try {
-			std::array<int, 3>::iterator it = easyfind(arr, 2);
 			std::cout << "Found: " << *it << std::endl;
 		} catch (std::exception &e) {
 			std::cout << e.what() << std::endl;

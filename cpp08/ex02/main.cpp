@@ -16,13 +16,15 @@
 
 
 int main() {
+	std::cout << "==== deque ====" << std::endl;
 	{
-		std::cout << "deque" << std::endl;
 		MutantStack<int> mstack;
 		mstack.push(5);
 		mstack.push(17);
+		std::cout << "mstack top: ";
 		std::cout << mstack.top() << std::endl;
 		mstack.pop();
+		std::cout << "mstack size: ";
 		std::cout << mstack.size() << std::endl;
 		mstack.push(3);
 		mstack.push(5);
@@ -34,18 +36,19 @@ int main() {
 		--it;
 		while (it != ite)
 		{
-			std::cout << *it << std::endl;
+			std::cout << "mstack: " << *it << std::endl;
 			++it;
 		}
-		std::stack<int> s(mstack);
 	}
+	std::cout << "==== list ====" << std::endl;
 	{
-		std::cout << "std::list" << std::endl;
 		MutantStack<int, std::list<int> > mstack;
 		mstack.push(5);
 		mstack.push(17);
+		std::cout << "mstack top: ";
 		std::cout << mstack.top() << std::endl;
 		mstack.pop();
+		std::cout << "mstack size: ";
 		std::cout << mstack.size() << std::endl;
 		mstack.push(3);
 		mstack.push(5);
@@ -57,7 +60,7 @@ int main() {
 		--it;
 		while (it != ite)
 		{
-			std::cout << *it << std::endl;
+			std::cout << "mstack: " << *it << std::endl;
 			++it;
 		}
 		std::stack<int, std::list<int> > s(mstack);

@@ -15,6 +15,7 @@
 #include <stdexcept>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 Span::Span() : m_max_size(0), m_array(new std::vector<int>(0)) {}
 
