@@ -7,6 +7,8 @@ OBJDIR = objs
 OBJ = $(SRC:%.cpp=$(OBJDIR)/%.o)
 INCLUDE = -I includes
 
+#add comment
+
 
 vpath	$(SRCDIR)
 
