@@ -6,7 +6,7 @@
 /*   By: rmatsuba <rmatsuba@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:30:12 by rmatsuba          #+#    #+#             */
-/*   Updated: 2024/10/23 11:55:37 by rmatsuba         ###   ########.fr       */
+/*   Updated: 2024/10/28 00:52:22 by rmatsuba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class Cure : public AMateria {
 		~Cure();
 		Cure &operator=(const Cure &other);
 		AMateria *clone() const;
+		void use(ICharacter &target);
 };
 
 #endif
