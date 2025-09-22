@@ -1,15 +1,67 @@
+#include <iostream>
+#include <iomanip>
 #include "PmergeMe.hpp"
 #include "VectorPmergeMe.hpp"
+#include "DequePmergeMe.hpp"
+
+void print_values_line(const std::list<element>& elems) {
+	std::list<element>::const_iterator it = elems.begin();
+	std::cout << "Before: ";
+	for (; it != elems.end(); ) {
+		std::cout << it->value;
+		++it;
+		if (it != elems.end()) std::cout << ' ';
+	}
+	std::cout << std::endl;
+}
+
+void print_values_line(const std::vector<element>& elems) {
+	std::vector<element>::const_iterator it = elems.begin();
+	std::cout << "After: ";
+	for (; it != elems.end(); ) {
+		std::cout << it->value;
+		++it;
+		if (it != elems.end()) std::cout << ' ';
+	}
+	std::cout << std::endl;
+}
+
+void print_values_line(const std::deque<element>& elems) {
+	std::deque<element>::const_iterator it = elems.begin();
+	std::cout << "After: ";
+	for (; it != elems.end(); ) {
+		std::cout << it->value;
+		++it;
+		if (it != elems.end()) std::cout << ' ';
+	}
+	std::cout << std::endl;
+}
+
+static double to_microseconds(std::clock_t ticks) {
+	return 1e6 * static_cast<double>(ticks) / static_cast<double>(CLOCKS_PER_SEC);
+}
 
 int main(int argc, char **argv) {
 	try {
 		const std::list<element> arg_list = initArgument(argc, argv);
-		vectorPmergeMe vector_list = vectorPmergeMe(arg_list);
-		std::cout << "Befor" << std::endl;
-		printVector(vector_list.getVector());
-		vector_list.pmergeMe_sort();
-		std::cout << "After: " << std::endl;
-		printVector(vector_list.getVector());
+		print_values_line(arg_list);
+		// vector
+		vectorPmergeMe vimpl(arg_list);
+		vimpl.pmergeMe_sort();
+		const double vec_us = to_microseconds(vimpl.getProcessTime());
+		print_values_line(vimpl.getVector());
+		
+		// deque
+		dequePmergeMe dimpl(arg_list);
+		dimpl.pmergeMe_sort();
+		const double deq_us = to_microseconds(dimpl.getProcessTime());
+		const std::size_t n = vimpl.getVector().size();
+		std::cout << "Time to process a range of " << n
+			<< " elements with std::vector : "
+			<< std::fixed << std::setprecision(5) << vec_us << " us" << std::endl;
+		std::cout << "Time to process a range of " << n
+			<< " elements with std::deque  : "
+			<< std::fixed << std::setprecision(5) << deq_us << " us" << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}

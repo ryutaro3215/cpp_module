@@ -15,9 +15,9 @@ public:
 	virtual void pmergeMe_sort() = 0;
 	void setStartTime();
 	void setEndTime();
-	std::time_t getStartTime();
-	std::time_t getEndTime();
-	std::time_t getProcessTime();
+	std::clock_t getStartTime();
+	std::clock_t getEndTime();
+	std::clock_t getProcessTime();
 };
 
 
@@ -26,5 +26,6 @@ bool isValidNumber(std::string input);
 const std::list<element> initArgument(int argument_c, const char* const* argument);
 std::time_t getCurrentTime();
 void printVector(const std::vector<element>& vec);
+void printDeque(const std::deque<element>& deq);
 
 #endif

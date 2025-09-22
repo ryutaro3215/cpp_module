@@ -12,15 +12,15 @@ void pmergeMe::setEndTime() {
 	_end = std::clock();
 }
 
-std::time_t pmergeMe::getStartTime() {
+std::clock_t pmergeMe::getStartTime() {
 	return _start;
 }
 
-std::time_t pmergeMe::getEndTime() {
+std::clock_t pmergeMe::getEndTime() {
 	return _end;
 }
 
-std::time_t pmergeMe::getProcessTime() {
+std::clock_t pmergeMe::getProcessTime() {
 	return getEndTime() - getStartTime();
 }
 
@@ -69,4 +69,9 @@ std::time_t getCurrentTime() {
 void printVector(const std::vector<element>& vec) {
 	for (std::vector<element>::const_iterator it = vec.begin(); it != vec.end(); it++)
 		std::cout << "vec[" << it->index << "]: " << it->value << "pair_id: " << it->pair_id <<  std::endl;
+}
+
+void printDeque(const std::deque<element>& deq) {
+	for (std::deque<element>::const_iterator it = deq.begin(); it != deq.end(); it++)
+		std::cout << "deq[" << it->index << "]: " << it->value << "pair_id: " << it->pair_id <<  std::endl;
 }
