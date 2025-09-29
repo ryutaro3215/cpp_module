@@ -7,7 +7,7 @@ NAME = PmergeMe
 # 通常ビルド用
 SRCS = main.cpp PmergeMe.cpp VectorPmergeMe.cpp DequePmergeMe.cpp
 OBJS = $(SRCS:%.cpp=$(OBJS_DIR)/%.o)
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 # テストビルド用（CMakeに渡す）
 TEST_CXXFLAGS = -std=c++17

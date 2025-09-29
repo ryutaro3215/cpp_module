@@ -2,6 +2,7 @@
 # define LIST_PMERGE_ME
 
 #include "PmergeMe.hpp" 
+#include <deque>
 
 class dequePmergeMe : public pmergeMe {
 private:

@@ -3,6 +3,9 @@
 # include <iostream>
 # include <list>
 # include <ctime>
+# include <vector>
+# include <deque>
+# include <cstddef>
 #include "element.hpp"
 
 

@@ -2,7 +2,7 @@
 #include <climits>
 #include "PmergeMe.hpp"
 
-pmergeMe::~pmergeMe() {};
+pmergeMe::~pmergeMe() {}
 
 void pmergeMe::setStartTime() {
 	_start = std::clock();
@@ -41,7 +41,7 @@ int strToInt(std::string input) {
 	if (result > INT_MAX)
 		throw std::runtime_error("Integer Overflow");
 	return result;
-};
+}
 
 const std::list<element> initArgument(int argument_c, const char* const* argument) {
 	std::list<element> init_list;
@@ -62,7 +62,7 @@ const std::list<element> initArgument(int argument_c, const char* const* argumen
 }
 
 std::time_t getCurrentTime() {
-	std::time_t now = std::time(nullptr);
+	std::time_t now = std::time(NULL);
 	return now;
 }
 

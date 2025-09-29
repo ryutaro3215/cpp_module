@@ -3,6 +3,7 @@
 
 #include "PmergeMe.hpp"
 #include "element.hpp"
+#include <vector>
 
 class vectorPmergeMe : public pmergeMe {
 private:
