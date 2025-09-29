@@ -78,7 +78,7 @@ void rpn::calculate(std::string el) {
 		default:
 			throw invalid_argument();
 	}
-	if (result > INT_MAX)
+	if (result > static_cast<float>(INT_MAX))
 		throw int_overflow();
 
 	std::ostringstream oss;
