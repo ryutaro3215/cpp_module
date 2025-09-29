@@ -1,9 +1,9 @@
 #include "VectorPmergeMe.hpp"
 #include <algorithm>
 
-vectorPmergeMe::vectorPmergeMe() {};
+vectorPmergeMe::vectorPmergeMe() {}
 
-vectorPmergeMe::~vectorPmergeMe() {};
+vectorPmergeMe::~vectorPmergeMe() {}
 
 vectorPmergeMe::vectorPmergeMe(const std::list<element>& arg_list) {
 	for (std::list<element>::const_iterator it = arg_list.begin(); it != arg_list.end(); it++)

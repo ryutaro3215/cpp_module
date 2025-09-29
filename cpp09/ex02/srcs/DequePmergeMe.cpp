@@ -1,9 +1,9 @@
 #include "DequePmergeMe.hpp"
 #include <algorithm>
 
-dequePmergeMe::dequePmergeMe() {};
+dequePmergeMe::dequePmergeMe() {}
 
-dequePmergeMe::~dequePmergeMe() {};
+dequePmergeMe::~dequePmergeMe() {}
 
 dequePmergeMe::dequePmergeMe(const std::list<element>& arg_list) {
 	for (std::list<element>::const_iterator it = arg_list.begin(); it != arg_list.end(); it++)
