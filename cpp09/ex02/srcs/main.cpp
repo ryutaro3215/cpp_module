@@ -43,25 +43,34 @@ static double to_microseconds(std::clock_t ticks) {
 
 int main(int argc, char **argv) {
 	try {
+		//引数の初期化
 		const std::list<element> arg_list = initArgument(argc, argv);
 		print_values_line(arg_list);
-		// vector
+		//vector
 		vectorPmergeMe vimpl(arg_list);
 		vimpl.pmergeMe_sort();
 		const double vec_us = to_microseconds(vimpl.getProcessTime());
-		print_values_line(vimpl.getVector());
-		
 		// deque
 		dequePmergeMe dimpl(arg_list);
 		dimpl.pmergeMe_sort();
 		const double deq_us = to_microseconds(dimpl.getProcessTime());
 		const std::size_t n = vimpl.getVector().size();
+
+		//vector
+		std::cout << "vector sort" << std::endl;
 		std::cout << "Time to process a range of " << n
 			<< " elements with std::vector : "
 			<< std::fixed << std::setprecision(5) << vec_us << " us" << std::endl;
+		print_values_line(vimpl.getVector());
+		std::cout << "vector compare count: " << vimpl.getCounter() << std::endl;
+
+		//deque
+		std::cout << "deque sort" << std::endl;
 		std::cout << "Time to process a range of " << n
 			<< " elements with std::deque  : "
 			<< std::fixed << std::setprecision(5) << deq_us << " us" << std::endl;
+		print_values_line(dimpl.getDeque());
+		std::cout << "deque compare count: " << dimpl.getCounter() << std::endl;
 	} catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}

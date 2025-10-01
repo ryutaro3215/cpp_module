@@ -1,23 +1,23 @@
 #include "DequePmergeMe.hpp"
-#include <algorithm>
+#include <algorithm> // std::min
+#include <cstddef>   // size_t
 
 dequePmergeMe::dequePmergeMe() {}
-
 dequePmergeMe::~dequePmergeMe() {}
 
 dequePmergeMe::dequePmergeMe(const std::list<element>& arg_list) {
-	for (std::list<element>::const_iterator it = arg_list.begin(); it != arg_list.end(); it++)
+	for (std::list<element>::const_iterator it = arg_list.begin(); it != arg_list.end(); ++it)
 		_deque.push_back(*it);
+	_counter = 0; 
 }
 
 dequePmergeMe::dequePmergeMe(const dequePmergeMe& other) {
-	for (std::deque<element>::const_iterator it = other._deque.begin(); it != other._deque.end(); it++)
-		this->_deque.push_back(*it);
+	for (std::deque<element>::const_iterator it = other._deque.begin(); it != other._deque.end(); ++it)
+		_deque.push_back(*it);
 }
 
-dequePmergeMe &dequePmergeMe::operator=(const dequePmergeMe& other) {
-	if (this == &other)
-		return *this;
+dequePmergeMe& dequePmergeMe::operator=(const dequePmergeMe& other) {
+	if (this == &other) return *this;
 	_deque = other._deque;
 	return *this;
 }
@@ -27,31 +27,31 @@ std::deque<element> dequePmergeMe::getDeque() const {
 }
 
 void dequePmergeMe::pmergeMe_sort() {
-	//Starting Algorithm
 	setStartTime();
 	sorting(_deque);
 	setEndTime();
 }
 
 void dequePmergeMe::sorting(std::deque<element>& original) {
-	if (original.size() <= 1)
-		return ;
+	if (original.size() <= 1) return;
 	std::deque<element> large, small;
 	divIntoLargeAndSmall(original, large, small);
-	std::deque<int> pairid_by_index;
-	build_pairid_table_by_index(large, pairid_by_index);
 	sorting(large);
-	restore_pairid_from_index_table(large, pairid_by_index);
-	groupJacobsthal(small, large);
-	inserting(original, large, small);
+	restore_large_index(original, large);
+	insert_smallest_el(large, small);
+	arrange_to_jacobsthal(small);
+	insertion(large, small);
+	original.swap(large);
 }
 
-void dequePmergeMe::divIntoLargeAndSmall(std::deque<element>& original, std::deque<element>& large, std::deque<element>& small) {
+void dequePmergeMe::divIntoLargeAndSmall(std::deque<element>& original, std::deque<element>& large, std::deque<element>& small)
+{
 	int pair_num = 0;
-	for (size_t i = 0; i + 1 < original.size(); i += 2) {
-		original[i].pair_id = pair_num;
+	size_t i = 0;
+	for (; i + 1 < original.size(); i += 2) {
+		original[i].pair_id     = pair_num;
 		original[i + 1].pair_id = pair_num;
-		int left = original[i].value;
+		int left  = original[i].value;
 		int right = original[i + 1].value;
 		if (left < right) {
 			small.push_back(original[i]);
@@ -60,127 +60,127 @@ void dequePmergeMe::divIntoLargeAndSmall(std::deque<element>& original, std::deq
 			small.push_back(original[i + 1]);
 			large.push_back(original[i]);
 		}
+		_counter++; // 比較カウント
 		pair_num++;
 	}
 	if (original.size() % 2 == 1) {
 		element tail = original.back();
 		tail.pair_id = -1;
-		large.push_back(tail);
+		small.push_back(tail);
 	}
 }
 
-void dequePmergeMe::groupJacobsthal(std::deque<element>& small, std::deque<element>& large) {
-	if (small.empty())
-		return ;
-
-	size_t i = 0;
-	int max_id = -1;
-	for (i = 0; i < small.size(); ++i) {
-		if (small[i].pair_id > max_id)
-			max_id = small[i].pair_id;
-	}
-	if (max_id < 0) {
-		small.clear();
-		return ;
-	}
-
-	std::deque<element> small_by_id(max_id + 1);
-	std::deque<char> has_small(max_id + 1, 0);
-
-	for (size_t i = 0; i < small.size(); ++i) {
-		const int pid = small[i].pair_id;
-		if (pid >= 0 && pid <= max_id) {
-			small_by_id[pid] = small[i];
-			has_small[pid] = 1;
-		}
-	}
-	std::deque<element> small_in_chain_order;
-
-	std::deque<element>::const_iterator lit = large.begin();
-	for (; lit != large.end(); ++lit) {
-		const int pid = lit->pair_id;
-		if (pid >= 0 && pid <= max_id && has_small[pid]) 
-			small_in_chain_order.push_back(small_by_id[pid]);
-	}
-
-	std::deque<size_t> ord = dequePmergeMe::make_jacobsthal_order(small_in_chain_order.size());
-	std::deque<element> jacob_small;
-	for (size_t i = 0; i < ord.size(); ++i) {
-		jacob_small.push_back(small_in_chain_order[ord[i]]);
-	}
-
-	small.swap(jacob_small);
-}
-
-void dequePmergeMe::inserting(std::deque<element>& original, std::deque<element>& large, std::deque<element>& small) {
-	original = large;
-	for (std::deque<element>::const_iterator sit = small.begin(); sit != small.end(); ++sit) {
-		const int up_pair = sit->pair_id;
-		std::deque<element>::iterator upperIt = original.begin();
-		for (; upperIt != original.end(); ++upperIt) {
-			if (upperIt->pair_id == up_pair) break;
-		}
-		if (upperIt == original.end()) upperIt = original.end();
-		std::deque<element>::iterator pos =
-			std::lower_bound(original.begin(), upperIt, *sit, &dequePmergeMe::compValue);
-		original.insert(pos, *sit);
+void dequePmergeMe::restore_large_index(std::deque<element>& original, std::deque<element>& large) {
+	for (std::deque<element>::iterator it = large.begin(); it != large.end(); ++it) {
+		it->pair_id = search_pair_id(original, it->value);
 	}
 }
 
-bool dequePmergeMe::compValue(const element& a, const element& b) {
-	return a.value < b.value;
+int dequePmergeMe::search_pair_id(std::deque<element>& original, int value) {
+	for (std::deque<element>::const_iterator it = original.begin(); it != original.end(); ++it) {
+		if (it->value == value) return it->pair_id;
+	}
+	return -2; // 想定外
 }
 
-std::deque<size_t> dequePmergeMe::make_jacobsthal_order(size_t n) {
-	std::deque<size_t> J;
-	if (n == 0) {
-		return std::deque<size_t>();
+void dequePmergeMe::insert_smallest_el(std::deque<element>& large, std::deque<element>& small) {
+	if (large.empty()) return;
+
+	const int head_pid = large.front().pair_id;
+	if (head_pid < 0) return; 
+
+	for (std::deque<element>::iterator sit = small.begin(); sit != small.end(); ++sit) {
+		if (sit->pair_id == head_pid) {
+			large.push_front(*sit);
+			small.erase(sit);
+			break;
+		}
+	}
+}
+
+void dequePmergeMe::arrange_to_jacobsthal(std::deque<element>& small) {
+	const size_t n = small.size();
+	if (n <= 1) return;
+
+	std::vector<size_t> ord = make_jacobsthal_order(n);
+	std::deque<element> arranged;
+	arranged.resize(n);
+	for (size_t k = 0; k < ord.size(); ++k) {
+		arranged[k] = small[ord[k]];
+	}
+	small.swap(arranged);
+}
+
+std::vector<size_t> dequePmergeMe::make_jacobsthal_order(size_t n) {
+	std::vector<size_t> order;
+	if (n == 0) return order;
+	order.reserve(n);
+
+	std::vector<size_t> groups;
+	size_t used = 0;
+	size_t g1 = 2, g2 = 2;
+	size_t next_pow2 = 8;
+
+	groups.push_back(std::min(g1, n - used)); used += std::min(g1, n - (used));
+	if (used < n) { groups.push_back(std::min(g2, n - used)); used += std::min(g2, n - used); }
+
+	size_t gprev = g2;
+	while (used < n) {
+		size_t gcur = next_pow2 - gprev; 
+		size_t take = std::min(gcur, n - used);
+		groups.push_back(take);
+		used += take;
+		gprev = gcur;
+		next_pow2 <<= 1;
 	}
 
-	J.push_back(1);
-	while (J.back() < n) {
-		if (J.size() == 1)
-			J.push_back(3);
-		else
-			J.push_back(J[J.size() - 1] + 2 * J[J.size() - 2]);
-	}
-
-	std::deque<size_t> order;
-	order.push_back(0);
-	size_t prev = 1;
-	for (size_t k = 0; prev < n; ++k) {
-		size_t cur = (J[k] < n) ? J[k] : n;
-		if (cur <= prev) {
-			prev = cur;
-			continue;
-		}
-		size_t i = cur;
-		while (i-- > prev) {
-			order.push_back(i);
-		}
-		prev = cur;
+	size_t base = 0;
+	for (size_t gi = 0; gi < groups.size(); ++gi) {
+		size_t len = groups[gi];
+		if (len == 0) break;
+		size_t start = base;
+		size_t end   = base + len;
+		size_t i = end;
+		while (i-- > start) order.push_back(i);
+		base += len;
 	}
 	return order;
 }
-void dequePmergeMe::build_pairid_table_by_index(const std::deque<element>& vec, std::deque<int>& pid_by_index) {
-	size_t i;
-	for (i = 0; i < vec.size(); ++i) {
-		const size_t idx = static_cast<size_t>(vec[i].index);
-		if (idx >= pid_by_index.size())
-			pid_by_index.resize(idx + 1, -2); // -2 は未設定の印
-		pid_by_index[idx] = vec[i].pair_id;
-	}
-}
 
-void dequePmergeMe::restore_pairid_from_index_table(std::deque<element>& vec, const std::deque<int>& pid_by_index) {
-	size_t i;
-	for (i = 0; i < vec.size(); ++i) {
-		const size_t idx = static_cast<size_t>(vec[i].index);
-		if (idx < pid_by_index.size() && pid_by_index[idx] != -2) {
-			vec[i].pair_id = pid_by_index[idx];
+void dequePmergeMe::insertion(std::deque<element>& large, std::deque<element>& small) {
+	for (std::deque<element>::iterator it = small.begin(); it != small.end(); ++it) {
+		std::deque<element>::iterator upperIt = find_last_with_pair_id(large, it->pair_id);
+		if (upperIt == large.end()) {
+			upperIt = large.end();
 		}
+		std::deque<element>::iterator pos = binary_search(*it, large.begin(), upperIt);
+		large.insert(pos, *it);
 	}
 }
 
+std::deque<element>::iterator
+dequePmergeMe::find_last_with_pair_id(std::deque<element>& large, int pair_id) {
+	for (std::deque<element>::iterator it = large.begin(); it != large.end(); ++it) {
+		if (it->pair_id == pair_id) return it;
+	}
+	return large.end();
+}
 
+std::deque<element>::iterator
+dequePmergeMe::binary_search(element& el, std::deque<element>::iterator head, std::deque<element>::iterator tail)
+{
+	if (head == tail) return head;
+	std::deque<element>::iterator mid = head + (tail - head) / 2;
+	_counter++;
+	if (mid->value < el.value) {
+		return binary_search(el, mid + 1, tail);
+	} else {
+		return binary_search(el, head, mid);
+	}
+}
 
+size_t dequePmergeMe::sum_vec_val(std::vector<size_t> group) {
+	size_t s = 0;
+	for (std::vector<size_t>::const_iterator it = group.begin(); it != group.end(); ++it) s += *it;
+	return s;
+}

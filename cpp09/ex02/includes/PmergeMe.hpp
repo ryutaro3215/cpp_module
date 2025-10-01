@@ -13,11 +13,13 @@ class pmergeMe {
 protected:
 	std::clock_t _start;
 	std::clock_t _end;
+	size_t _counter;
 public:
 	virtual ~pmergeMe() = 0;
 	virtual void pmergeMe_sort() = 0;
 	void setStartTime();
 	void setEndTime();
+	size_t getCounter() const;
 	std::clock_t getStartTime();
 	std::clock_t getEndTime();
 	std::clock_t getProcessTime();

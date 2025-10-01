@@ -2,6 +2,7 @@
 #include <climits>
 #include "PmergeMe.hpp"
 
+
 pmergeMe::~pmergeMe() {}
 
 void pmergeMe::setStartTime() {
@@ -74,4 +75,8 @@ void printVector(const std::vector<element>& vec) {
 void printDeque(const std::deque<element>& deq) {
 	for (std::deque<element>::const_iterator it = deq.begin(); it != deq.end(); it++)
 		std::cout << "deq[" << it->index << "]: " << it->value << "pair_id: " << it->pair_id <<  std::endl;
+}
+
+size_t pmergeMe::getCounter() const {
+	return _counter;
 }

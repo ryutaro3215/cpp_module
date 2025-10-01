@@ -1,29 +1,34 @@
-#ifndef LIST_PMERGE_ME
-# define LIST_PMERGE_ME
+#ifndef DEQUE_PMERGEME_HPP
+#define DEQUE_PMERGEME_HPP
 
-#include "PmergeMe.hpp" 
+#include "PmergeMe.hpp"
+#include "element.hpp"
 #include <deque>
+#include <vector>
+#include <list>
 
 class dequePmergeMe : public pmergeMe {
 private:
 	std::deque<element> _deque;
-public:
 	dequePmergeMe();
+public:
 	dequePmergeMe(const std::list<element>& arg_list);
 	~dequePmergeMe();
 	dequePmergeMe(const dequePmergeMe& other);
-	dequePmergeMe &operator=(const dequePmergeMe& other);
-	void pmergeMe_sort();
-	void divIntoLargeAndSmall(std::deque<element>& original, std::deque<element>& large, std::deque<element>& small);
-	void merge_part(std::deque<element>& original);
-	void sorting(std::deque<element>& original);
-	void inserting(std::deque<element>& original, std::deque<element>& large, std::deque<element>& small);
-	static bool compValue(const element& a, const element& b);
+	dequePmergeMe& operator=(const dequePmergeMe& other);
 	std::deque<element> getDeque() const;
-	void groupJacobsthal(std::deque<element>& small, std::deque<element>& large);
-	std::deque<size_t> make_jacobsthal_order(size_t n);
-	void build_pairid_table_by_index(const std::deque<element>& vec, std::deque<int>& pid_by_index);
-	void restore_pairid_from_index_table(std::deque<element>& vec, const std::deque<int>& pid_by_index);
+	void pmergeMe_sort();
+	void sorting(std::deque<element>& original);
+	void divIntoLargeAndSmall(std::deque<element>& original, std::deque<element>& large, std::deque<element>& small);
+	void restore_large_index(std::deque<element>& original, std::deque<element>& large);
+	int  search_pair_id(std::deque<element>& original, int value);
+	void insert_smallest_el(std::deque<element>& large, std::deque<element>& small);
+	void arrange_to_jacobsthal(std::deque<element>& small);
+	std::vector<size_t> make_jacobsthal_order(size_t n);
+	void insertion(std::deque<element>& large, std::deque<element>& small);
+	std::deque<element>::iterator find_last_with_pair_id(std::deque<element>& large, int pair_id);
+	std::deque<element>::iterator binary_search(element& el, std::deque<element>::iterator head, std::deque<element>::iterator tail);
+	size_t sum_vec_val(std::vector<size_t> group);
 };
 
 #endif

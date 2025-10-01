@@ -14,17 +14,20 @@ public:
 	~vectorPmergeMe();
 	vectorPmergeMe(const vectorPmergeMe& other);
 	vectorPmergeMe &operator=(const vectorPmergeMe& other);
+	std::vector<element> getVector() const;
+	bool compValue(const element& a, const element& b);
 	void pmergeMe_sort();
 	void divIntoLargeAndSmall(std::vector<element>& original, std::vector<element>& large, std::vector<element>& small);
-	void merge_part(std::vector<element>& original);
 	void sorting(std::vector<element>& original);
-	void inserting(std::vector<element>& original, std::vector<element>& large, std::vector<element>& small);
-	static bool compValue(const element& a, const element& b);
-	std::vector<element> getVector() const;
-	void groupJacobsthal(std::vector<element>& small, std::vector<element>& large);
+	void restore_large_index(std::vector<element>& original, std::vector<element>& large);
+	int search_pair_id(std::vector<element>& original, int value);
+	void insert_smallest_el(std::vector<element>& large, std::vector<element>& small);
+	void arrange_to_jacobsthal(std::vector<element>& small);
 	std::vector<size_t> make_jacobsthal_order(size_t n);
-	void build_pairid_table_by_index(const std::vector<element>& vec, std::vector<int>& pid_by_index);
-	void restore_pairid_from_index_table(std::vector<element>& vec, const std::vector<int>& pid_by_index);
+	void insertion(std::vector<element>& large, std::vector<element>& small);
+	std::vector<element>::iterator binary_search(element& el, std::vector<element>::iterator head, std::vector<element>::iterator tail);
+	size_t sum_vec_val(std::vector<size_t> group);
+	std::vector<element>::iterator find_last_with_pair_id(std::vector<element>& large, int pair_id);
 };
 
 

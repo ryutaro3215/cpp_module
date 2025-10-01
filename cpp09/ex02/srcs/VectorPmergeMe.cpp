@@ -8,6 +8,7 @@ vectorPmergeMe::~vectorPmergeMe() {}
 vectorPmergeMe::vectorPmergeMe(const std::list<element>& arg_list) {
 	for (std::list<element>::const_iterator it = arg_list.begin(); it != arg_list.end(); it++)
 		_vector.push_back(*it);
+	_counter = 0;
 }
 
 vectorPmergeMe::vectorPmergeMe(const vectorPmergeMe& other) {
@@ -37,15 +38,24 @@ void vectorPmergeMe::sorting(std::vector<element>& original) {
 	if (original.size() <= 1)
 		return ;
 	std::vector<element> large, small;
+	//元のベクターをlarge, smallに先頭からペアごとに比較、分割する。
 	divIntoLargeAndSmall(original, large, small);
-	std::vector<int> pairid_by_index;
-	build_pairid_table_by_index(large, pairid_by_index);
+	//largeに対して再帰的にsortingを実施
 	sorting(large);
-	restore_pairid_from_index_table(large, pairid_by_index);
-	groupJacobsthal(small, large);
-	inserting(original, large, small);
+	//再帰から帰ってきたら、元の配列のpair_idを復元する。
+	restore_large_index(original, large);
+	//largeの先頭とペアのsmallの要素を探して、比較0回でlargeの先頭に入れ込む
+	insert_smallest_el(large, small);
+	//smallをjacobsthal数列の順序に並べ替える
+	arrange_to_jacobsthal(small);
+	//二部探索を実行する。smallの要素をlargeに入れる
+	insertion(large, small);
+	//完成したソート済みの要素たち(large)をoriginalに反映させる。
+	//再帰しているのでこれをしないと結果が上の階層に反映されない
+	original.swap(large);
 }
 
+//ソート前の配列を前から二つずつでペアにしてlarge, smallに分割する。これは再帰的に発生する
 void vectorPmergeMe::divIntoLargeAndSmall(std::vector<element>& original, std::vector<element>& large, std::vector<element>& small) {
 	int pair_num = 0;
 	for (size_t i = 0; i + 1 < original.size(); i += 2) {
@@ -60,130 +70,155 @@ void vectorPmergeMe::divIntoLargeAndSmall(std::vector<element>& original, std::v
 			small.push_back(original[i + 1]);
 			large.push_back(original[i]);
 		}
+		//比較回数のカウント
+		_counter++;
 		pair_num++;
 	}
 	if (original.size() % 2 == 1) {
 		element tail = original.back();
 		tail.pair_id = -1;
-		large.push_back(tail);
+		small.push_back(tail);
 	}
 }
 
-void vectorPmergeMe::groupJacobsthal(std::vector<element>& small, std::vector<element>& large) {
-	if (small.empty())
-		return ;
-
-	size_t i = 0;
-	int max_id = -1;
-	for (i = 0; i < small.size(); ++i) {
-		if (small[i].pair_id > max_id)
-			max_id = small[i].pair_id;
+//再帰から帰ってきた時にここでlargeのpair_idをその階層でのpair_idに復元する
+void vectorPmergeMe::restore_large_index(std::vector<element>& original, std::vector<element>& large) {
+	for (std::vector<element>::iterator it = large.begin(); it != large.end(); it++) {
+		it->pair_id = search_pair_id(original, it->value);
 	}
-	if (max_id < 0) {
-		small.clear();
-		return ;
+}
+
+//valueに対応したその階層でのpair_idを探してくる
+int vectorPmergeMe::search_pair_id(std::vector<element>& original, int value) {
+	for (std::vector<element>::const_iterator it = original.begin(); it != original.end(); it++) {
+		if (it->value == value)
+			return it->pair_id;
 	}
+	//可能性はほぼない
+	return -2;
+}
 
-	std::vector<element> small_by_id(max_id + 1);
-	std::vector<char> has_small(max_id + 1, 0);
-
-	for (size_t i = 0; i < small.size(); ++i) {
-		const int pid = small[i].pair_id;
-		if (pid >= 0 && pid <= max_id) {
-			small_by_id[pid] = small[i];
-			has_small[pid] = 1;
+//largeの先頭要素に対応するsmallの要素をlargeの先頭に挿入する（比較回数ゼロ）
+void vectorPmergeMe::insert_smallest_el(std::vector<element>& large, std::vector<element>& small) {
+	if(large.empty())
+		return;
+	const int head_pid = large.front().pair_id;
+	std::vector<element>::iterator sit = small.begin();
+	for (; sit != small.end(); ++sit) {
+		if (sit->pair_id == head_pid) {
+			large.insert(large.begin(), *sit);
+			small.erase(sit);
+			break;
 		}
 	}
-	std::vector<element> small_in_chain_order;
-	small_in_chain_order.reserve(small.size());
-
-	std::vector<element>::const_iterator lit = large.begin();
-	for (; lit != large.end(); ++lit) {
-		const int pid = lit->pair_id;
-		if (pid >= 0 && pid <= max_id && has_small[pid]) 
-			small_in_chain_order.push_back(small_by_id[pid]);
-	}
-
-	std::vector<size_t> ord = vectorPmergeMe::make_jacobsthal_order(small_in_chain_order.size());
-	std::vector<element> jacob_small;
-	jacob_small.reserve(small_in_chain_order.size());
-	for (size_t i = 0; i < ord.size(); ++i) {
-		jacob_small.push_back(small_in_chain_order[ord[i]]);
-	}
-
-	small.swap(jacob_small);
+	return ;
 }
 
-void vectorPmergeMe::inserting(std::vector<element>& original, std::vector<element>& large, std::vector<element>& small) {
-	original = large;
-	original.reserve(large.size() + small.size());
-	for (std::vector<element>::const_iterator sit = small.begin(); sit != small.end(); ++sit) {
-		const int up_pair = sit->pair_id;
-		std::vector<element>::iterator upperIt = original.begin();
-		for (; upperIt != original.end(); ++upperIt) {
-			if (upperIt->pair_id == up_pair) break;
-		}
-		if (upperIt == original.end()) upperIt = original.end();
-		std::vector<element>::iterator pos =
-			std::lower_bound(original.begin(), upperIt, *sit, &vectorPmergeMe::compValue);
-		original.insert(pos, *sit);
+//smallの要素をjacobsthal_order順に並べ替える
+//並べ替えればその順番のままlargeにインサートできる
+//jacobsthal数を使うのは、それを使うことで二分探索の時の最悪比較回数を抑えられる。
+//探索範囲を2^n - 1に抑えるため
+void vectorPmergeMe::arrange_to_jacobsthal(std::vector<element>& small) {
+	std::vector<size_t> jacobsthal = make_jacobsthal_order(small.size());
+	std::vector<element> arranged_small;
+	for (std::vector<size_t>::const_iterator it = jacobsthal.begin(); it < jacobsthal.end(); ++it) {
+		arranged_small.push_back(small[*it]);
 	}
+	small.swap(arranged_small);
 }
 
-bool vectorPmergeMe::compValue(const element& a, const element& b) {
-	return a.value < b.value;
-}
-
+//jacobsthal orderを作る ([1, 0], [3, 2], [9, 8, 7, 6, 5, 4])
 std::vector<size_t> vectorPmergeMe::make_jacobsthal_order(size_t n) {
-	std::vector<size_t> J;
-	if (n == 0) {
-		return std::vector<size_t>();
+	//jacobsthalを使ってsmallを先頭からグルーピングするときの一つのグループの要素の数を決める
+	//groupは[2, 2, 6, 10...] -> 隣り合った要素の和が2の冪乗になるように。
+	std::vector<size_t> group;
+	std::vector<size_t> jacobstal_order;
+	size_t g0 = 2;
+	group.push_back(g0);
+	size_t prev = g0;
+	size_t exp = 2;
+	while (true) {
+		size_t now = exp *2 - prev;
+		group.push_back(now);
+		prev = now;
+		exp *= 2;
+		if (sum_vec_val(group) >= n)
+			break ;
 	}
-
-	J.push_back(1);
-	while (J.back() < n) {
-		if (J.size() == 1)
-			J.push_back(3);
-		else
-			J.push_back(J[J.size() - 1] + 2 * J[J.size() - 2]);
-	}
-
-	std::vector<size_t> order;
-	order.push_back(0);
-	size_t prev = 1;
-	for (size_t k = 0; prev < n; ++k) {
-		size_t cur = (J[k] < n) ? J[k] : n;
-		if (cur <= prev) {
-			prev = cur;
-			continue;
+	//作ったグループを元にして、挿入順序のindex列を作る
+	size_t el_count = 0;
+	for (size_t l = 0; l < group.size(); ++l) {
+		size_t size = std::min(group[l], n - el_count);
+		if (size== 0)
+			break;
+		size_t start = el_count;
+		size_t end = el_count + size;
+		size_t i = end - 1;
+		while (true) {
+			jacobstal_order.push_back(i);
+			if (i == start)
+				break;
+			i--;
 		}
-		size_t i = cur;
-		while (i-- > prev) {
-			order.push_back(i);
-		}
-		prev = cur;
+		el_count += size;
+		if (el_count == n)
+			break;
 	}
-	return order;
-}
-void vectorPmergeMe::build_pairid_table_by_index(const std::vector<element>& vec, std::vector<int>& pid_by_index) {
-	size_t i;
-	for (i = 0; i < vec.size(); ++i) {
-		const size_t idx = static_cast<size_t>(vec[i].index);
-		if (idx >= pid_by_index.size())
-			pid_by_index.resize(idx + 1, -2); // -2 は未設定の印
-		pid_by_index[idx] = vec[i].pair_id;
-	}
+	return jacobstal_order;
 }
 
-void vectorPmergeMe::restore_pairid_from_index_table(std::vector<element>& vec, const std::vector<int>& pid_by_index) {
-	size_t i;
-	for (i = 0; i < vec.size(); ++i) {
-		const size_t idx = static_cast<size_t>(vec[i].index);
-		if (idx < pid_by_index.size() && pid_by_index[idx] != -2) {
-			vec[i].pair_id = pid_by_index[idx];
-		}
+//groupの数をたす
+//要素数を超えたら止めるために使う
+size_t vectorPmergeMe::sum_vec_val(std::vector<size_t> group) {
+	size_t sum = 0;
+	for (std::vector<size_t>::const_iterator it = group.begin(); it != group.end(); ++it)
+		sum += *it;
+	return sum;
+}
+
+//実際のインサート処理
+void vectorPmergeMe::insertion(std::vector<element>& large, std::vector<element>& small) {
+	for (std::vector<element>::iterator it = small.begin(); it < small.end(); ++it) {
+		//挿入要素の相方を見つける。ここが上限
+		std::vector<element>::iterator upperIt = find_last_with_pair_id(large, it->pair_id);
+		//実際の挿入位置
+		std::vector<element>::iterator pos = binary_search(*it, large.begin(), upperIt);
+		large.insert(pos, *it);
 	}
 }
+
+//挿入する要素の相方のiteratorを見つける
+std::vector<element>::iterator vectorPmergeMe::find_last_with_pair_id(std::vector<element>& large, int pair_id) {
+	std::vector<element>::iterator it = large.begin();
+	while (it != large.end()) {
+		if (it->pair_id == pair_id)
+			return it;
+		it++;
+	}
+	return it;
+}
+
+//実際の二部探索
+std::vector<element>::iterator vectorPmergeMe::binary_search(element& el, std::vector<element>::iterator head, std::vector<element>::iterator tail) {
+	if (head == tail)
+		return head;
+	std::vector<element>::iterator mid = head + (tail - head) / 2;
+	_counter++;
+	if (mid->value < el.value) {
+		return binary_search(el, mid + 1, tail);
+	} else {
+		return binary_search(el, head, mid);
+	}
+}
+
+
+
+
+
+
+
+
+
 
 
 
