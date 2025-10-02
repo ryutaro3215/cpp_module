@@ -158,10 +158,11 @@ void dequePmergeMe::insertion(std::deque<element>& large, std::deque<element>& s
 	}
 }
 
-std::deque<element>::iterator
-dequePmergeMe::find_last_with_pair_id(std::deque<element>& large, int pair_id) {
-	for (std::deque<element>::iterator it = large.begin(); it != large.end(); ++it) {
-		if (it->pair_id == pair_id) return it;
+std::deque<element>::iterator dequePmergeMe::find_last_with_pair_id(std::deque<element>& large, int pair_id) {
+	for (std::deque<element>::iterator it = large.end(); it != large.begin();) {
+		--it;
+		if (it->pair_id == pair_id)
+			return it;
 	}
 	return large.end();
 }
