@@ -189,13 +189,12 @@ void vectorPmergeMe::insertion(std::vector<element>& large, std::vector<element>
 
 //挿入する要素の相方のiteratorを見つける
 std::vector<element>::iterator vectorPmergeMe::find_last_with_pair_id(std::vector<element>& large, int pair_id) {
-	std::vector<element>::iterator it = large.begin();
-	while (it != large.end()) {
+	for (std::vector<element>::iterator it = large.end(); it != large.begin();) {
+		--it;
 		if (it->pair_id == pair_id)
 			return it;
-		it++;
 	}
-	return it;
+	return large.end();
 }
 
 //実際の二部探索
