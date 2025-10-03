@@ -1,5 +1,7 @@
 #include "VectorPmergeMe.hpp"
+#include "PmergeMe.hpp"
 #include <algorithm>
+
 
 vectorPmergeMe::vectorPmergeMe() {}
 
@@ -46,10 +48,16 @@ void vectorPmergeMe::sorting(std::vector<element>& original) {
 	restore_large_index(original, large);
 	//largeの先頭とペアのsmallの要素を探して、比較0回でlargeの先頭に入れ込む
 	insert_smallest_el(large, small);
+	//ソートずみlargeに対応したpair_idの順番にsmallを並べ替える
+	arrange_to_large(large, small);
 	//smallをjacobsthal数列の順序に並べ替える
 	arrange_to_jacobsthal(small);
 	//二部探索を実行する。smallの要素をlargeに入れる
 	insertion(large, small);
+	// std::cout << "small" << std::endl;
+	// printVector(small);
+	// std::cout << "large" << std::endl;
+	// printVector(large);
 	//完成したソート済みの要素たち(large)をoriginalに反映させる。
 	//再帰しているのでこれをしないと結果が上の階層に反映されない
 	original.swap(large);
@@ -84,14 +92,14 @@ void vectorPmergeMe::divIntoLargeAndSmall(std::vector<element>& original, std::v
 //再帰から帰ってきた時にここでlargeのpair_idをその階層でのpair_idに復元する
 void vectorPmergeMe::restore_large_index(std::vector<element>& original, std::vector<element>& large) {
 	for (std::vector<element>::iterator it = large.begin(); it != large.end(); it++) {
-		it->pair_id = search_pair_id(original, it->value);
+		it->pair_id = search_pair_id(original, it->index);
 	}
 }
 
-//valueに対応したその階層でのpair_idを探してくる
-int vectorPmergeMe::search_pair_id(std::vector<element>& original, int value) {
+//indexに対応したその階層でのpair_idを探してくる
+int vectorPmergeMe::search_pair_id(std::vector<element>& original, size_t index) {
 	for (std::vector<element>::const_iterator it = original.begin(); it != original.end(); it++) {
-		if (it->value == value)
+		if (it->index == index)
 			return it->pair_id;
 	}
 	//可能性はほぼない
@@ -112,6 +120,29 @@ void vectorPmergeMe::insert_smallest_el(std::vector<element>& large, std::vector
 		}
 	}
 	return ;
+}
+
+//largeのpair_idと同じ順番にsmallを並べ替える
+void vectorPmergeMe::arrange_to_large(std::vector<element>& large, std::vector<element>& small) {
+	std::vector<element> arranged_small;
+	for (std::vector<element>::const_iterator it = large.begin() + 2; it < large.end(); ++it) {
+		element pair_small = find_el_with_pair_id(small, it->pair_id);
+		arranged_small.push_back(pair_small);
+	}
+	if (arranged_small.size() != small.size())
+		arranged_small.push_back(*small.end());
+	small.swap(arranged_small);
+}
+
+//同じpair_idを持つelementを見つける　
+element vectorPmergeMe::find_el_with_pair_id(std::vector<element>& small, int pair_id) {
+	for (std::vector<element>::iterator it = small.begin(); it < small.end(); ++it) {
+		if (it->pair_id == pair_id)
+			return *it;
+	}
+	element err;
+	err.pair_id = -2;
+	return err;
 }
 
 //smallの要素をjacobsthal_order順に並べ替える
@@ -176,22 +207,18 @@ size_t vectorPmergeMe::sum_vec_val(std::vector<size_t> group) {
 	return sum;
 }
 
-//実際のインサート処理
 void vectorPmergeMe::insertion(std::vector<element>& large, std::vector<element>& small) {
-	for (std::vector<element>::iterator it = small.begin(); it < small.end(); ++it) {
-		//挿入要素の相方を見つける。ここが上限
-		std::vector<element>::iterator upperIt = find_last_with_pair_id(large, it->pair_id);
-		//実際の挿入位置
+	for(std::vector<element>::iterator it = small.begin(); it < small.end(); ++it) {
+		std::vector<element>::iterator upperIt = find_last_with_pair_id(large, *it);
 		std::vector<element>::iterator pos = binary_search(*it, large.begin(), upperIt);
 		large.insert(pos, *it);
 	}
 }
-
 //挿入する要素の相方のiteratorを見つける
-std::vector<element>::iterator vectorPmergeMe::find_last_with_pair_id(std::vector<element>& large, int pair_id) {
+std::vector<element>::iterator vectorPmergeMe::find_last_with_pair_id(std::vector<element>& large,element& pair) {
 	for (std::vector<element>::iterator it = large.end(); it != large.begin();) {
 		--it;
-		if (it->pair_id == pair_id)
+		if (it->pair_id == pair.pair_id)
 			return it;
 	}
 	return large.end();
@@ -209,15 +236,4 @@ std::vector<element>::iterator vectorPmergeMe::binary_search(element& el, std::v
 		return binary_search(el, head, mid);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
 

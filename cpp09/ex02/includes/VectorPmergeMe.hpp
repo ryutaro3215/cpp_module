@@ -20,14 +20,16 @@ public:
 	void divIntoLargeAndSmall(std::vector<element>& original, std::vector<element>& large, std::vector<element>& small);
 	void sorting(std::vector<element>& original);
 	void restore_large_index(std::vector<element>& original, std::vector<element>& large);
-	int search_pair_id(std::vector<element>& original, int value);
+	int search_pair_id(std::vector<element>& original, size_t index);
 	void insert_smallest_el(std::vector<element>& large, std::vector<element>& small);
+	void arrange_to_large(std::vector<element>& large, std::vector<element>& small);
 	void arrange_to_jacobsthal(std::vector<element>& small);
 	std::vector<size_t> make_jacobsthal_order(size_t n);
 	void insertion(std::vector<element>& large, std::vector<element>& small);
 	std::vector<element>::iterator binary_search(element& el, std::vector<element>::iterator head, std::vector<element>::iterator tail);
 	size_t sum_vec_val(std::vector<size_t> group);
-	std::vector<element>::iterator find_last_with_pair_id(std::vector<element>& large, int pair_id);
+	std::vector<element>::iterator find_last_with_pair_id(std::vector<element>& large, element& pair);
+	element find_el_with_pair_id(std::vector<element>& small, int pair_id);
 };
 
 
